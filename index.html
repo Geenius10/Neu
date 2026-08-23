@@ -1,50 +1,62 @@
 <!doctype html><html lang="de"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#173b2c"><meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="manifest" href="/manifest.webmanifest"><link rel="apple-touch-icon" href="/icons/icon-192.png"><link rel="stylesheet" href="/styles.css"><title>Einkaufsweg</title>
-</head><body>
-<header><div><small>EINKAUFSWEG</small><h1 id="title">Einkaufsliste</h1></div><button id="settings" aria-label="Einstellungen">⚙️</button></header>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102d22">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="stylesheet" href="/styles.css">
+<title>Einkaufsweg</title></head><body>
+<header class="appbar">
+  <div class="brand"><span class="mark">🛒</span><div><small>EINKAUFSWEG</small><h1 id="screenTitle">Einkaufsliste</h1></div></div>
+  <button id="settingsBtn" class="iconbtn" aria-label="Einstellungen">⚙</button>
+</header>
 <main>
-<section id="list" class="screen active">
-<h2>Was brauchst du?</h2><p>Erstelle deine Liste unabhängig vom Standort.</p>
-<div class="add"><input id="input" placeholder="z. B. Milch, Bananen, Kaffee"><button id="add">Hinzufügen</button></div>
-<div id="syncState" class="sync"></div>
-<div id="items"></div><button id="toStore" class="primary sticky">Filiale wählen</button>
+<section id="listScreen" class="screen active">
+  <div class="hero-copy"><span class="step">01</span><div><h2>Was brauchst du?</h2><p>Deine Liste ist unabhängig vom Markt. Erst danach wird sie für die Filiale sortiert.</p></div></div>
+  <div class="composer"><input id="itemInput" autocomplete="off" placeholder="Milch, Bananen, Nudeln …"><button id="addBtn" class="primary">Hinzufügen</button></div>
+  <div id="syncState" class="sync"></div>
+  <div id="emptyState" class="empty"><div class="empty-icon">＋</div><b>Deine Liste ist leer</b><span>Füge oben den ersten Artikel hinzu.</span></div>
+  <div id="items" class="items"></div>
+  <button id="chooseStoreBtn" class="primary action">Filiale wählen <span>→</span></button>
 </section>
 
-<section id="store" class="screen">
-<button class="back" data-to="list">← Zurück zur Liste</button><h2>Wo kaufst du ein?</h2>
-<p>Die Liste bleibt gleich. Beim Wechsel der Filiale werden Laufweg und Angebote automatisch aktualisiert.</p>
-<select id="storeSelect">
-<option value="rewe1">REWE · Justus-Liebig-Str. 8</option>
-<option value="rewe2">REWE · Friedrichstr. 53</option>
-<option value="lidl1">Lidl · Nürnberger Str. 3a</option>
-<option value="lidl2">Lidl · Bernecker Str. 26</option>
-<option value="aldi1">ALDI SÜD · Otto-Hahn-Str. 1a</option>
-<option value="aldi2">ALDI SÜD · Tunnelstr. 11</option>
-<option value="netto1">Netto · Bamberger Str. 38</option>
-<option value="norma1">NORMA · Kanalstr. 17</option>
-</select>
-<div id="storeOfferSummary" class="offer-summary">Angebote werden automatisch geprüft …</div>
-<div class="card"><b>Laufweg</b><div id="routePreview" class="route"></div><button id="editRoute" class="secondary wide">Laufweg anpassen</button></div>
-<button id="start" class="primary sticky">Einkauf starten</button>
+<section id="storeScreen" class="screen">
+  <button class="back" data-screen="list">← Einkaufsliste</button>
+  <div class="hero-copy"><span class="step">02</span><div><h2>Wo kaufst du ein?</h2><p>Filiale wechseln ändert nur Reihenfolge und echte Angebots-Treffer.</p></div></div>
+  <div class="field"><label for="storeSelect">Filiale in Bayreuth</label><select id="storeSelect"></select></div>
+  <div id="offerSummary" class="notice">Angebote werden automatisch geprüft.</div>
+  <div class="card">
+    <div class="card-head"><div><small>DEIN LAUFWEG</small><b id="storeName"></b></div><button id="editRouteBtn" class="mini">Anpassen</button></div>
+    <div id="routePreview" class="route"></div>
+  </div>
+  <button id="startBtn" class="primary action">Einkauf starten <span>→</span></button>
 </section>
 
-<section id="shop" class="screen">
-<button class="back" data-to="store">← Filiale wechseln</button><small id="shopStore"></small><h2>Optimal sortiert</h2>
-<p id="progressText"></p><div class="progress"><div id="progressBar"></div></div>
-<div id="shopItems"></div><button id="finish" class="primary sticky">Einkauf abschließen</button>
+<section id="shopScreen" class="screen">
+  <button class="back" data-screen="store">← Filiale wechseln</button>
+  <span id="shopStore" class="store-kicker"></span><h2>Dein Laufweg</h2>
+  <div class="progress-head"><span id="progressText"></span><b id="progressPct">0%</b></div>
+  <div class="progress"><div id="progressBar"></div></div>
+  <div id="shopItems" class="items"></div>
+  <button id="finishBtn" class="primary action">Einkauf abschließen ✓</button>
 </section>
 
-<section id="route" class="screen">
-<button class="back" data-to="store">← Zurück</button><h2>Laufweg anpassen</h2><p>Sortiere die Bereiche dieser Filiale.</p>
-<div id="routeEditor"></div><button id="saveRoute" class="primary sticky">Laufweg speichern</button>
+<section id="routeScreen" class="screen">
+  <button class="back" data-screen="store">← Filiale</button>
+  <h2>Laufweg anpassen</h2><p>Speichere die echte Reihenfolge dieser Filiale. Deine Einkaufsliste bleibt unberührt.</p>
+  <div id="routeEditor" class="route-editor"></div>
+  <button id="saveRouteBtn" class="primary action">Laufweg speichern</button>
 </section>
 
 <section id="settingsScreen" class="screen">
-<button class="back" data-to="list">← Zurück</button><h2>Einstellungen</h2>
-<div class="card"><h3>Backup</h3><button id="export" class="secondary wide">Backup erstellen</button>
-<label class="file wide">Backup wiederherstellen<input id="importFile" type="file" accept="application/json"></label></div>
-<div class="card"><h3>Angebote</h3><p>Werden automatisch im Hintergrund über das lokale Backend von Marktguru abgeglichen. Kein Angebots-Button nötig.</p></div>
+  <button class="back" data-screen="list">← Zurück</button><h2>Einstellungen</h2>
+  <div class="card"><h3>Backup</h3><p>Liste und gelernte Laufwege lokal sichern.</p>
+    <button id="exportBtn" class="secondary full">Backup erstellen</button>
+    <label class="filebtn full">Backup wiederherstellen<input id="importInput" type="file" accept="application/json"></label>
+  </div>
+  <div class="card"><h3>Angebote</h3><p>Es gibt keine vorgetäuschten Preise. Ein Angebots-Badge erscheint ausschließlich bei einem Treffer des Online-Dienstes.</p></div>
 </section>
-</main><script src="/app.js"></script></body></html>
+</main>
+<script src="/app.js"></script></body></html>

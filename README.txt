@@ -1,33 +1,32 @@
-Einkaufsweg v9 – automatische Marktguru-Angebote
+Einkaufsweg v12 – Bayreuth Pilot
+
+Status:
+Keine Demo-Artikel und keine erfundenen Rabatte mehr.
+Die App startet leer. Angebotsinformationen werden ausschließlich durch den Online-Abgleich erzeugt.
+
+Projektstruktur:
+Alle Dateien liegen absichtlich gemeinsam in EINEM Ordner:
+- index.html
+- styles.css
+- app.js
+- server.py
+- requirements.txt
+- manifest.webmanifest
+- sw.js
+- icon-192.png
+- icon-512.png
+- README.txt
 
 Start:
-1) Python 3 installieren
-2) Im Projektordner:
-   pip install -r requirements.txt
-   python server.py
-3) Browser: http://localhost:8000
+pip install -r requirements.txt
+python server.py
+Danach http://localhost:8000 öffnen.
 
-Neu:
-- KEIN Angebots-Button mehr
-- nach Hinzufügen von Artikeln und nach Wechsel der Filiale lädt das Backend automatisch passende Marktguru-Angebote
-- Treffer erscheinen direkt am Artikel
-- Marktwechsel löscht nur alte Angebots-Treffer und lädt neue; die Einkaufsliste bleibt unverändert
-- Backend umgeht Browser-CORS, cached Marktguru-Seiten 30 Minuten und liefert nur die passenden Daten an die PWA
-- Offline bleiben Liste, Haken und Laufwege funktionsfähig; nur neue Angebote können dann nicht geladen werden
+Die Filialliste enthält die aktuell recherchierten Bayreuther Standorte der großen Ketten
+einschließlich EDEKA/E center, nah & gut, REWE, nahkauf, Lidl, ALDI SÜD, Netto, NORMA,
+Kaufland sowie einige weitere lokale Lebensmittelmärkte.
 
-Hinweis:
-Dies ist ein technischer Prototyp. Für produktiven Einsatz sollten Abrufhäufigkeit, Nutzungsbedingungen,
-Fehlerbehandlung und ggf. eine offizielle Datenvereinbarung mit dem Datenanbieter geprüft werden.
-
-
-v10:
-- Homescreen-App-Icon ergänzt
-- Einkaufswagen + Plus als App-Symbol
-- Android maskable icon
-- Apple Touch Icon für iPhone
-
-
-v11:
-- ZIP enthält jetzt einen echten Top-Level-Ordner einkaufsweg-pwa-v11/
-- Struktur: server.py + requirements.txt im Root, PWA unter static/, Icons unter static/icons/
-- UI deutlich modernisiert, Kernfluss unverändert
+Wichtig:
+Dies ist eine Pilot-/MVP-Version, kein produktionsreifes Release. Für Produktion fehlen u.a.
+dauerhaft belastbare Angebots-Datenvereinbarung/API, Hosting, Monitoring, Datenschutzkonzept,
+Sicherheits-/Lasttests und echte Multi-Device-Synchronisierung.
