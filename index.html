@@ -1,97 +1,50 @@
-<!doctype html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#173b2c">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="styles.css">
-<title>Einkaufsweg</title>
-</head>
-<body>
-<header class="top"><div><span class="eyebrow">Bayreuth Pilot · MVP</span><h1>Einkaufsweg</h1><p>Liste erstellen. Markt wählen. Optimal einkaufen.</p></div><button id="installBtn" class="ghost hidden">Installieren</button></header>
+<!doctype html><html lang="de"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173b2c"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="/manifest.webmanifest"><link rel="apple-touch-icon" href="/icons/icon-192.png"><link rel="stylesheet" href="/styles.css"><title>Einkaufsweg</title>
+</head><body>
+<header><div><small>EINKAUFSWEG</small><h1 id="title">Einkaufsliste</h1></div><button id="settings" aria-label="Einstellungen">⚙️</button></header>
 <main>
-<section class="panel">
-<div class="section-head"><div><span class="eyebrow">1 · Liste erstellen</span><h2>Was brauchst du?</h2></div></div>
-<textarea id="quickInput" rows="3" placeholder="z. B. 2 Milch, Bananen, 500 g Hackfleisch, Kaffee"></textarea>
-<div class="actions"><button id="voiceBtn" class="secondary">🎙️ Sprechen</button><button id="quickAddBtn" class="primary">Zur Liste</button></div>
-<div id="suggestions" class="suggestions"></div>
-<div class="section-head compact"><div><span class="eyebrow">Deine Liste</span><h2 id="itemCount">0 Artikel</h2></div><button id="addBtn" class="secondary">+ einzeln</button></div>
-<div class="legend"><span>● dauerhaft</span><span>● einmalig</span><span>● Angebot</span></div>
-<div id="masterList" class="shopping-list"></div>
+<section id="list" class="screen active">
+<h2>Was brauchst du?</h2><p>Erstelle deine Liste unabhängig vom Standort.</p>
+<div class="add"><input id="input" placeholder="z. B. Milch, Bananen, Kaffee"><button id="add">Hinzufügen</button></div>
+<div id="syncState" class="sync"></div>
+<div id="items"></div><button id="toStore" class="primary sticky">Filiale wählen</button>
 </section>
 
-<section class="panel">
-<div class="section-head"><div><span class="eyebrow">2 · Wo einkaufen?</span><h2>Filiale auswählen</h2></div></div>
-<label>Filiale<select id="store">
-<option value="rewe-justus">REWE · Justus-Liebig-Str. 8</option>
-<option value="rewe-kanal">REWE · Kanalstr. 15–17</option>
-<option value="rewe-friedrich">REWE · Friedrichstr. 53</option>
-<option value="rewe-spinnerei">REWE · Spinnereistr. 7–13</option>
-<option value="rewe-bamberger">REWE · Bamberger Str. 32</option>
-<option value="lidl-nuernberg">Lidl · Nürnberger Str. 3a</option>
-<option value="lidl-adolf">Lidl · Adolf-Wächter-Str. 1</option>
-<option value="lidl-meran">Lidl · Meranierring 49</option>
-<option value="lidl-bernecker">Lidl · Bernecker Str. 26</option>
-<option value="aldi-otto">ALDI SÜD · Otto-Hahn-Str. 1a</option>
-<option value="aldi-tunnel">ALDI SÜD · Tunnelstr. 11</option>
-<option value="aldi-nuernberg">ALDI SÜD · Nürnberger Str. 96</option>
-<option value="norma-kanal">NORMA · Kanalstr. 17</option>
-<option value="norma-bauhof">NORMA · Am Bauhof 4</option>
-<option value="netto-richard">Netto · Richard-Wagner-Str. 17</option>
-<option value="netto-bamberger">Netto · Bamberger Str. 38</option>
-</select></label>
-<div id="storeCompare" class="compare-grid"></div>
-<div class="actions"><button id="learnBtn" class="secondary">Laufweg bearbeiten</button><button id="startShopBtn" class="primary">Einkauf starten</button></div>
-<p class="hint">Die Liste bleibt identisch. Nur die Reihenfolge wird für die gewählte Filiale angepasst.</p>
+<section id="store" class="screen">
+<button class="back" data-to="list">← Zurück zur Liste</button><h2>Wo kaufst du ein?</h2>
+<p>Die Liste bleibt gleich. Beim Wechsel der Filiale werden Laufweg und Angebote automatisch aktualisiert.</p>
+<select id="storeSelect">
+<option value="rewe1">REWE · Justus-Liebig-Str. 8</option>
+<option value="rewe2">REWE · Friedrichstr. 53</option>
+<option value="lidl1">Lidl · Nürnberger Str. 3a</option>
+<option value="lidl2">Lidl · Bernecker Str. 26</option>
+<option value="aldi1">ALDI SÜD · Otto-Hahn-Str. 1a</option>
+<option value="aldi2">ALDI SÜD · Tunnelstr. 11</option>
+<option value="netto1">Netto · Bamberger Str. 38</option>
+<option value="norma1">NORMA · Kanalstr. 17</option>
+</select>
+<div id="storeOfferSummary" class="offer-summary">Angebote werden automatisch geprüft …</div>
+<div class="card"><b>Laufweg</b><div id="routePreview" class="route"></div><button id="editRoute" class="secondary wide">Laufweg anpassen</button></div>
+<button id="start" class="primary sticky">Einkauf starten</button>
 </section>
 
-<section id="shopPanel" class="panel hidden">
-<div class="section-head"><div><span class="eyebrow">3 · Einkaufsmodus</span><h2 id="shopTitle">Optimierter Laufweg</h2></div><span id="progressPill" class="pill">0 / 0</span></div>
-<div class="progress"><div id="progressBar"></div></div>
-<div id="shoppingList" class="shopping-list"></div>
-<div class="actions sticky"><button id="stopShopBtn" class="secondary">Beenden</button><button id="finishBtn" class="primary">Einkauf abschließen</button></div>
+<section id="shop" class="screen">
+<button class="back" data-to="store">← Filiale wechseln</button><small id="shopStore"></small><h2>Optimal sortiert</h2>
+<p id="progressText"></p><div class="progress"><div id="progressBar"></div></div>
+<div id="shopItems"></div><button id="finish" class="primary sticky">Einkauf abschließen</button>
 </section>
 
-<section class="hero"><div><span class="eyebrow">Angebote zur Liste</span><h2 id="dealCount">0 passende Angebote</h2><p>Demo-Angebote werden mit deiner Liste abgeglichen und nach Markt verglichen.</p></div><div class="hero-price" id="saving">0,00 €</div></section>
-
-<section class="panel">
-<div class="section-head"><div><span class="eyebrow">Filialwissen</span><h2>Gelernter Laufweg</h2></div><span id="learnState" class="pill">Standard</span></div>
-<div id="routePreview" class="route-preview"></div>
-<p class="hint">Der Laufweg wird pro Filiale gespeichert. Die Abhak-Reihenfolge wird zusätzlich als Lernsignal im Verlauf gespeichert.</p>
+<section id="route" class="screen">
+<button class="back" data-to="store">← Zurück</button><h2>Laufweg anpassen</h2><p>Sortiere die Bereiche dieser Filiale.</p>
+<div id="routeEditor"></div><button id="saveRoute" class="primary sticky">Laufweg speichern</button>
 </section>
 
-<section class="panel">
-<div class="section-head"><div><span class="eyebrow">Haushalt</span><h2>Gemeinsame Liste</h2></div></div>
-<div class="two"><label>Haushaltsname<input id="householdName" placeholder="z. B. Familie Müller"></label><label>Dein Name<input id="memberName" placeholder="z. B. Alex"></label></div>
-<div class="actions"><button id="shareBtn" class="secondary">Share-Code erzeugen</button><button id="copyShareBtn" class="secondary">Share-Code kopieren</button></div>
-<textarea id="shareCode" class="code" rows="3" readonly placeholder="Share-Code erscheint hier"></textarea>
-<p class="hint">Echtes Live-Syncing zwischen mehreren Handys benötigt später ein Backend. Der Share-Code ist bereits als transportierbare Zwischenlösung eingebaut.</p>
+<section id="settingsScreen" class="screen">
+<button class="back" data-to="list">← Zurück</button><h2>Einstellungen</h2>
+<div class="card"><h3>Backup</h3><button id="export" class="secondary wide">Backup erstellen</button>
+<label class="file wide">Backup wiederherstellen<input id="importFile" type="file" accept="application/json"></label></div>
+<div class="card"><h3>Angebote</h3><p>Werden automatisch im Hintergrund über das lokale Backend von Marktguru abgeglichen. Kein Angebots-Button nötig.</p></div>
 </section>
-
-<section class="panel">
-<div class="section-head"><div><span class="eyebrow">Daten & Sicherheit</span><h2>Backup & Gerätewechsel</h2></div></div>
-<div class="actions"><button id="exportBtn" class="secondary">Backup erstellen</button><label class="file-button">Backup wiederherstellen<input id="importInput" type="file" accept="application/json"></label><button id="copyBackupBtn" class="secondary">Backup-Code kopieren</button></div>
-<textarea id="backupCode" class="code" rows="3" readonly placeholder="Backup-Code erscheint hier"></textarea>
-</section>
-</main>
-
-<dialog id="addDialog"><form id="addForm">
-<h2>Artikel hinzufügen</h2>
-<label>Artikel<input id="itemName" required placeholder="z. B. Äpfel"></label>
-<label>Menge<input id="itemQty" placeholder="z. B. 2 oder 500 g"></label>
-<label>Kategorie<select id="itemCategory"><option>Obst & Gemüse</option><option>Backwaren</option><option>Kühlung</option><option>Fleisch & Wurst</option><option>Vorrat</option><option>Getränke</option><option>Tiefkühlung</option><option>Drogerie</option><option>Sonstiges</option></select></label>
-<label>Typ<select id="itemMode"><option value="once">Einmalig</option><option value="recurring">Dauerhaft</option></select></label>
-<div class="dialog-actions"><button type="button" id="cancelAdd">Abbrechen</button><button class="primary">Hinzufügen</button></div>
-</form></dialog>
-
-<dialog id="learnDialog"><form id="learnForm">
-<h2>Laufweg dieser Filiale</h2><p class="hint">Per Drag & Drop oder mit ↑ und ↓ sortieren.</p>
-<div id="learnList" class="learn-list"></div>
-<div class="dialog-actions"><button type="button" id="resetRoute">Standard</button><button type="button" id="cancelLearn">Abbrechen</button><button class="primary">Speichern</button></div>
-</form></dialog>
-
-<script src="app.js"></script>
-</body></html>
+</main><script src="/app.js"></script></body></html>
