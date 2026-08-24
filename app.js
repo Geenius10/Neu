@@ -60,7 +60,7 @@ function emptyState(){
 }
 function load(){
   try{
-    const x=JSON.parse(localStorage.getItem("rethink-einkauf-v23"));
+    const x=JSON.parse(localStorage.getItem("rethink-einkauf-v24"));
     if(x?.items&&x?.routes){
       x.hiddenCategories=x.hiddenCategories||{};
       x.compareStore=x.compareStore||"";
@@ -77,7 +77,7 @@ let state=load();
 let editing=[];
 let offerTimer=null;
 
-function save(){localStorage.setItem("rethink-einkauf-v23",JSON.stringify(state));}
+function save(){localStorage.setItem("rethink-einkauf-v24",JSON.stringify(state));}
 function currentStore(){return STORES.find(s=>s.id===state.store)||STORES[0];}
 function compareStore(){return STORES.find(s=>s.id===state.compareStore)||null;}
 function hiddenForStore(){return new Set(state.hiddenCategories?.[state.store]||[]);}
@@ -136,19 +136,37 @@ function offerRows(item){
 function itemNode(item,shopping=false){
   const el=document.createElement("div");
   el.className="item"+(item.checked?" checked":"")+(offersFor(item).length?" offer":"");
-  el.innerHTML=`<input class="check" data-id="${item.id}" type="checkbox" ${item.checked?"checked":""}><div><div class="item-name">${esc(item.name)}</div><div class="meta"><button class="tag ${item.mode}" data-mode="${item.id}">${item.mode==="recurring"?"dauerhaft":"einmalig"}</button><select class="category-select" data-category-id="${item.id}" aria-label="Kategorie ändern">
-  ${BASE_ROUTE.map(c=>`<option value="${esc(c)}" ${c===item.cat?"selected":""}>${esc(c)}</option>`).join("")}
-</select></div>${offerRows(item)}${priceComparisonHtml(item)}</div>${shopping?"":`<button class="delete" data-delete="${item.id}" aria-label="Löschen">×</button>`}`;
+  el.innerHTML=`<input class="check" data-id="${item.id}" type="checkbox" ${item.checked?"checked":""}><div><div class="item-name">${esc(item.name)}</div><div class="meta"><button class="tag ${item.mode}" data-mode="${item.id}">${item.mode==="recurring"?"dauerhaft":"einmalig"}</button><button class="tag category-tag" data-category-id="${item.id}">${esc(item.cat)}</button></div>${offerRows(item)}${priceComparisonHtml(item)}</div>${shopping?"":`<button class="delete" data-delete="${item.id}" aria-label="Löschen">×</button>`}`;
   return el;
+}
+function openCategoryPicker(item){
+  let overlay=document.createElement("div");
+  overlay.className="category-picker-overlay";
+  overlay.innerHTML=`<div class="category-picker-sheet">
+    <div class="category-picker-head"><b>Kategorie ändern</b><button class="category-picker-close" aria-label="Schließen">×</button></div>
+    <div class="category-picker-list">
+      ${BASE_ROUTE.map(c=>`<button class="category-choice ${c===item.cat?"selected":""}" data-choice="${esc(c)}">${esc(c)}</button>`).join("")}
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+  const close=()=>overlay.remove();
+  overlay.addEventListener("click",e=>{if(e.target===overlay)close()});
+  overlay.querySelector(".category-picker-close").onclick=close;
+  overlay.querySelectorAll("[data-choice]").forEach(b=>b.onclick=()=>{
+    item.cat=b.dataset.choice;
+    save();
+    close();
+    render();
+  });
 }
 function bindList(box){
   box.querySelectorAll(".check").forEach(b=>b.addEventListener("change",e=>{
     const x=state.items.find(i=>i.id===e.target.dataset.id); if(!x)return;
     x.checked=e.target.checked; save(); render();
   }));
-  box.querySelectorAll("[data-category-id]").forEach(sel=>sel.addEventListener("change",()=>{
-    const x=state.items.find(i=>i.id===sel.dataset.categoryId); if(!x)return;
-    x.cat=sel.value; save(); render();
+  box.querySelectorAll("[data-category-id]").forEach(btn=>btn.addEventListener("click",()=>{
+    const item=state.items.find(i=>i.id===btn.dataset.categoryId); if(!item)return;
+    openCategoryPicker(item);
   }));
   box.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{
     const x=state.items.find(i=>i.id===b.dataset.mode); if(!x)return;

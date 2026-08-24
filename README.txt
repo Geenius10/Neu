@@ -111,3 +111,11 @@ v23 – Koch-/Backbereiche getrennt
 - Jeweils eigener automatischer Begriffspool.
 - Bestehende Artikel der alten Sammelkategorie werden anhand ihres Namens neu zugeordnet.
 - Bereits gelernte Filialrouten werden auf die drei neuen Kategorien migriert.
+
+
+v24 – dezente Kategorieänderung
+-------------------------------
+- Kategorie ist wieder ein normaler Tag in derselben Zeile wie „einmalig/dauerhaft“.
+- Keine Dropdown-Pfeile oder dauerhafte Auswahlbox.
+- Tippen auf den Kategorie-Tag öffnet erst dann die Kategorienauswahl.
+- Auswahl erscheint mobilfreundlich als kompakte Bottom-Sheet-Auswahl.
