@@ -43,12 +43,16 @@
     <div class="card-head"><div><small>DEIN LAUFWEG</small><b id="storeName"></b></div><button id="editRouteBtn" class="mini">Anpassen</button></div>
     <div id="routePreview" class="route"></div>
   </div>
+  <div id="compareRouteCard" class="card" hidden>
+    <div class="card-head"><div><small>ZWEITE FILIALE · LAUFWEG</small><b id="compareStoreName"></b></div><button id="editCompareRouteBtn" class="mini">Anpassen</button></div>
+    <div id="compareRoutePreview" class="route"></div>
+  </div>
   <button id="startBtn" class="primary action">Einkauf starten <span>→</span></button>
 </section>
 
 <section id="shopScreen" class="screen">
   <button class="back" data-screen="store">← Filiale wechseln</button>
-  <span id="shopStore" class="store-kicker"></span><h2>Dein Laufweg</h2>
+  <span id="shopStore" class="store-kicker"></span><h2 id="shopHeading">Dein Laufweg</h2><div id="shopStageHint" class="notice" hidden></div>
   <div class="progress-head"><span id="progressText"></span><b id="progressPct">0%</b></div>
   <div class="progress"><div id="progressBar"></div></div>
   <div id="shopItems" class="items"></div>

@@ -129,3 +129,40 @@ v25 – Drag & Drop und sauberer Kategorien-Reset
 - Touch-Fallback: Griff antippen, dann Zielposition antippen.
 - Kategorien zurücksetzen verändert die vorhandene Reihenfolge nicht.
 - Fehlende Kategorien werden nur unten an den bestehenden Laufweg angehängt.
+
+
+v26
+- Homescreen: Produkte alphabetisch nach Namen.
+- Kategorieauswahl alphabetisch; Laufweg-Reihenfolge bleibt individuell.
+- Bei zwei Filialen zeigt die Filialvorschau beide Laufwege mit eigener Bearbeitung.
+- Nach Filiale 1: offene Artikel können in Filiale 2 weitergekauft werden; kein automatisches Gesamt-Abschließen.
+- Backup-Import normalisiert ältere Backups und meldet Erfolg/Fehler eindeutig.
+
+
+v27 – Einkaufsmodus zeigt nur benötigte Produkte
+------------------------------------------------
+- Hauptseite: Haken = aktuell nicht benötigt.
+- Ohne Haken = für den nächsten Einkauf benötigt.
+- Beim Start werden ausschließlich Produkte ohne Haken übernommen.
+- Wird ein Produkt während des Einkaufs abgehakt, verschwindet es sofort aus dem aktuellen Einkaufsbild.
+- Bei zwei Filialen erscheinen in Filiale 2 nur die nach Filiale 1 noch offenen Produkte.
+
+
+v28 – vollständiger Code-Audit
+------------------------------
+- app.js komplett konsolidiert und neu aufgebaut.
+- Alle statischen HTML-IDs gegen JS-Selektoren geprüft.
+- JavaScript-Syntax geprüft.
+- Python-Backend-Syntax geprüft.
+- Button-/Event-Handler zentral verdrahtet.
+- Backup-Migration für ältere lokale Versionen.
+- Zwei-Filialen-Ablauf, Angebote, Preisvergleich, Kategorien, Laufwege und Einkaufsmodus gemeinsam geprüft.
+
+
+v29 – Listenstatus nach Einkauf beibehalten
+-------------------------------------------
+- Dauerhafte Artikel behalten nach Einkaufsende ihren aktuellen Hakenstatus.
+- Gekauft und abgehakt bleibt abgehakt.
+- Nicht gekauft und offen bleibt offen.
+- Erledigte einmalige Artikel werden weiterhin aus der Liste entfernt.
+- Dadurch muss der nächste Einkauf nicht jedes Mal komplett neu vorbereitet werden.

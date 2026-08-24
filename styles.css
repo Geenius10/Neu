@@ -220,3 +220,5 @@ main{width:min(760px,100%);margin:auto;padding:18px max(14px,env(safe-area-inset
 @media(max-width:560px){
   .route-row-manage{grid-template-columns:34px minmax(0,1fr) 40px}
 }
+
+#compareRouteCard[hidden]{display:none}
