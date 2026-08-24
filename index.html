@@ -68,7 +68,14 @@
     <button id="exportBtn" class="secondary full">Backup erstellen</button>
     <label class="filebtn full">Backup wiederherstellen<input id="importInput" type="file" accept="application/json"></label>
   </div>
-  <div class="card"><h3>Angebote</h3><p>Es gibt keine vorgetäuschten Preise. Ein Angebots-Badge erscheint ausschließlich bei einem Treffer des Online-Dienstes.</p></div>
+  <div class="card"><div class="setting-row"><div><h3>Preisvergleich</h3><p>Optional Preise pro Produkt und Filiale merken. Frühere Eingaben bleiben gespeichert.</p></div><label class="switch"><input id="priceCompareToggle" type="checkbox"><span class="slider"></span></label></div></div><div class="card"><h3>Angebote</h3><p>Es gibt keine vorgetäuschten Preise. Ein Angebots-Badge erscheint ausschließlich bei einem Treffer des Online-Dienstes.</p></div>
+
+  <div class="card">
+    <h3>Laufweg-Kategorien</h3>
+    <p>Ausgeblendete Kategorien bleiben pro Filiale gespeichert. Hier kannst du alle Kategorien der aktuell gewählten Filiale wiederherstellen.</p>
+    <button id="resetCategoriesBtn" class="secondary full">Kategorien zurücksetzen</button>
+  </div>
+
 </section>
 </main>
 <script src="./app.js"></script></body></html>

@@ -68,3 +68,46 @@ v18 – optionaler Zwei-Filialen-Preisvergleich
 - Gelernte Normalpreise pro Produkt/Filiale über + €.
 - Klare Trennung: Angebot vs. zuletzt bekannter Preis.
 - Günstiger-Hinweis nur wenn beide Seiten einen Preiswert haben.
+
+
+v19 – Preisvergleich optional
+- On/Off in Einstellungen.
+- Gespeicherte Preise bleiben erhalten.
+- Keine Günstiger-Tipps.
+- Angebote nur per Pfeil ein-/ausklappbar.
+- Deutlich feinere Abteilungen für optimale Filialwege.
+
+
+v20 – Kategorien verwalten + Produkt-Hinzufügen repariert
+----------------------------------------------------------
+- Produkt-Hinzufügen per Button und Enter neu verdrahtet.
+- Laufweg-Kategorien können pro Filiale mit × ausgeblendet werden.
+- Ausgeblendete Kategorien bleiben gespeichert.
+- Einstellungen: „Kategorien zurücksetzen“ stellt den vollständigen Standard-Laufweg wieder her.
+- Weniger relevante Kategorien können so dauerhaft entfernt werden, ohne die globale Standardliste zu verlieren.
+
+
+v21 – stabile Button-Verdrahtung
+- app.js zentral neu aufgebaut statt weiterer Einzelpatches.
+- Hinzufügen, Filiale wählen, Einkauf starten, Einstellungen, Laufweg, Backup und Preisvergleich neu verdrahtet.
+- Kategorien pro Filiale weiterhin ausblendbar und zurücksetzbar.
+
+
+v22 – robuste automatische Kategorisierung
+------------------------------------------
+- Großer Keyword-/Synonympool für jede Laufweg-Kategorie.
+- Singular, Plural und Wortstämme werden berücksichtigt.
+- Beispiel: Zigarette, Zigaretten, Kippen, Tabak, Filter, Blättchen, Feuerzeug → Tabak & Raucherbedarf.
+- Jeder Artikel hat zusätzlich direkt eine manuell änderbare Kategorie.
+- Manuelle Änderung wird gespeichert und überschreibt die Automatik für diesen Artikel.
+
+
+v23 – Koch-/Backbereiche getrennt
+---------------------------------
+- „Gewürze, Öl & Backzutaten“ ersetzt durch:
+  1. Gewürze
+  2. Essig & Öl
+  3. Backen
+- Jeweils eigener automatischer Begriffspool.
+- Bestehende Artikel der alten Sammelkategorie werden anhand ihres Namens neu zugeordnet.
+- Bereits gelernte Filialrouten werden auf die drei neuen Kategorien migriert.
