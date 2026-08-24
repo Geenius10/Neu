@@ -1,4 +1,4 @@
-const CACHE="rethink-einkauf-v16";
+const CACHE="rethink-einkauf-v18";
 const ASSETS=["./","./styles.css","./app.js","./manifest.webmanifest","./icon-192.png","./icon-512.png"];
 
 self.addEventListener("install", event => {

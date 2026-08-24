@@ -51,3 +51,20 @@ v16 – automatisches PWA-Update
 - "Jetzt aktualisieren" aktiviert die neue Version und lädt die App neu.
 - Alte Caches werden beim Aktivieren der neuen Version entfernt.
 - Zusätzlich wird beim Zurückkehren in die App und alle 15 Minuten nach Updates gesucht.
+
+
+v17 – Mehrfachangebote zuverlässig sichtbar
+- Backend-Parser liest jeden Angebotsblock einzeln.
+- Bis zu 20 streng relevante Treffer pro Einkaufsartikel.
+- Erstes Angebot direkt sichtbar.
+- Bei mehreren Treffern: „Weitere N Angebote anzeigen“.
+- Klick auf den Artikelnamen klappt weitere Angebote auf/zu.
+- Jedes Angebot öffnet die passende Marktguru-Händler/Kategorie-Seite.
+
+
+v18 – optionaler Zwei-Filialen-Preisvergleich
+- Hauptfiliale plus optionale Vergleichsfiliale.
+- Angebote beider Märkte parallel.
+- Gelernte Normalpreise pro Produkt/Filiale über + €.
+- Klare Trennung: Angebot vs. zuletzt bekannter Preis.
+- Günstiger-Hinweis nur wenn beide Seiten einen Preiswert haben.

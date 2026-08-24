@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parent
 app=Flask(__name__, static_folder=str(ROOT), static_url_path="")
 CACHE={}
 TTL=1800
-HEADERS={"User-Agent":"Mozilla/5.0 (compatible; RETHINK.einkauf/1.5)"}
+HEADERS={"User-Agent":"Mozilla/5.0 (compatible; RETHINK.einkauf/1.7)"}
 
 RETAILER_NAMES={
  "rewe":["REWE"],"nahkauf":["nahkauf"],"lidl":["Lidl"],"aldi-sued":["ALDI SÜD","ALDI Süd"],
@@ -99,32 +99,69 @@ def parse_offers(html,retailer_slug):
     lines=[re.sub(r"\s+"," ",x).strip() for x in soup.get_text("\n",strip=True).splitlines() if x.strip()]
     allowed=[x.lower() for x in RETAILER_NAMES.get(retailer_slug,[])]
     out=[]
+
     for i,line in enumerate(lines):
-        if not line.lower().startswith("händler"):
+        if line != "Händler:":
             continue
         retailer=lines[i+1] if i+1<len(lines) else ""
         if allowed and retailer.lower() not in allowed:
             continue
-        block=lines[max(0,i-18):i+2]
-        price=next((x for x in block if re.fullmatch(r"€\s*\d+[,.]\d{2}",x)),"")
-        valid=""
-        brand=""
-        for j,x in enumerate(block):
-            if x=="Gültig:" and j+1<len(block): valid=block[j+1]
-            if x=="Marke:" and j+1<len(block): brand=block[j+1]
+
+        lower=max(0,i-28)
+        price_idx=brand_idx=valid_idx=None
+        for j in range(i-1,lower-1,-1):
+            if lines[j]=="Händler:":
+                break
+            if valid_idx is None and lines[j]=="Gültig:":
+                valid_idx=j
+            if price_idx is None and lines[j]=="Preis:":
+                price_idx=j
+            if brand_idx is None and lines[j]=="Marke:":
+                brand_idx=j
+
+        if price_idx is None:
+            continue
+
+        price=""
+        for j in range(price_idx+1,i):
+            if re.fullmatch(r"€\s*\d+[,.]\d{2}",lines[j]):
+                price=lines[j]
+                break
+        if not price:
+            continue
+
+        brand=lines[brand_idx+1] if brand_idx is not None and brand_idx+1<i else ""
+        valid=lines[valid_idx+1] if valid_idx is not None and valid_idx+1<i else ""
+
+        anchor=brand_idx if brand_idx is not None and brand_idx<price_idx else price_idx
         title=""
-        for x in reversed(block):
-            if x in {"Marke:","Preis:","Gültig:","Händler:",retailer,price,valid,brand}: continue
-            if len(x)>2 and not x.lower().startswith(("noch ","leider ","aktuelle angebote","image")):
-                title=x;break
-        if title and price:
+        ignored_prefixes=("brandneu","in kürze","image","verpasst","noch ","in ","läuft bald ab","laeuft bald ab")
+        for j in range(anchor-1,lower-1,-1):
+            candidate=lines[j]
+            low=candidate.lower()
+            if candidate in {"Marke:","Preis:","Gültig:","Händler:"}:
+                continue
+            if low.startswith(ignored_prefixes):
+                continue
+            if re.fullmatch(r"\d+\s*(tag|tage|woche|wochen)",low):
+                continue
+            if len(candidate)>2:
+                title=candidate
+                break
+
+        if title:
             out.append({"title":title,"brand":brand,"price":price,"valid":valid,"retailer":retailer})
-    seen=set();result=[]
-    for x in out:
-        k=(x["title"],x["price"],x["retailer"])
-        if k not in seen:
-            seen.add(k);result.append(x)
-    return result[:20]
+
+    seen=set()
+    result=[]
+    for offer in out:
+        key=(normalize_text(offer.get("title","")),normalize_text(offer.get("brand","")),offer.get("price",""),offer.get("valid",""))
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(offer)
+    return result
+
 
 @app.get("/health")
 def health():
@@ -154,7 +191,11 @@ def match_offers():
                 collected.extend(parse_offers(fetch(url),retailer))
             except Exception:
                 pass
-        matches[iid]=filter_relevant_offers(name,collected,limit=12)
+        relevant=filter_relevant_offers(name,collected,limit=20)
+        category_url=f"https://www.marktguru.de/rc/{quote(retailer)}/{quote(slug)}"
+        for offer in relevant:
+            offer["source_url"]=category_url
+        matches[iid]=relevant
     return jsonify({"matches":matches,"source":"marktguru.de","cached_seconds":TTL})
 
 if __name__=="__main__":
