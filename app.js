@@ -4,20 +4,45 @@ const RULES=[[/banane|apfel|äpfel|tomate|gurke|kartoffel|salat|zwiebel|paprika|
 const $=s=>document.querySelector(s);
 function infer(name){const l=name.toLowerCase();for(const [r,c] of RULES)if(r.test(l))return c;return"Sonstiges"}
 function emptyState(){return {items:[],routes:{},store:"edeka-center-otto",offers:{}}}
-function load(){try{const x=JSON.parse(localStorage.getItem("rethink-einkauf-v14"));if(x?.items&&x?.routes)return x}catch(e){}return emptyState()}
+function load(){try{const x=JSON.parse(localStorage.getItem("rethink-einkauf-v16"));if(x?.items&&x?.routes)return x}catch(e){}return emptyState()}
 let state=load(),editing=[];
-function save(){localStorage.setItem("rethink-einkauf-v14",JSON.stringify(state))}
+function save(){localStorage.setItem("rethink-einkauf-v16",JSON.stringify(state))}
 function currentStore(){return STORES.find(s=>s.id===state.store)||STORES[0]}
 function route(){return state.routes[state.store]||BASE_ROUTE}
 function esc(s=""){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}
 function show(id,title){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$("#"+id+"Screen").classList.add("active");$("#screenTitle").textContent=title;window.scrollTo({top:0,behavior:"smooth"})}
 function sortedItems(){const o=route();return[...state.items].sort((a,b)=>{let ai=o.indexOf(a.cat),bi=o.indexOf(b.cat);return(ai<0?99:ai)-(bi<0?99:bi)})}
-function offerFor(item){return state.offers?.[item.id]?.[0]||null}
-function itemNode(item,shopping=false){const offer=offerFor(item),el=document.createElement("div");el.className="item"+(item.checked?" checked":"")+(offer?" offer":"");el.innerHTML=`<input class="check" data-id="${item.id}" type="checkbox" ${item.checked?"checked":""}><div><div class="item-name">${esc(item.name)}</div><div class="meta"><button class="tag ${item.mode}" data-mode="${item.id}">${item.mode==="recurring"?"dauerhaft":"einmalig"}</button><span class="tag">${item.cat}</span>${offer?'<span class="tag offer-tag">ANGEBOT</span>':""}</div>${offer?`<div class="offer-line"><strong>${esc(offer.price||"")}</strong> · ${esc(offer.title||"")}${offer.valid?` · ${esc(offer.valid)}`:""}</div>`:""}</div>${shopping?"":`<button class="delete" data-delete="${item.id}" aria-label="Löschen">×</button>`}`;return el}
+function offersFor(item){return state.offers?.[item.id]||[]}
+function itemNode(item,shopping=false){
+    const offers=offersFor(item),hasOffers=offers.length>0,el=document.createElement("div");
+    el.className="item"+(item.checked?" checked":"")+(hasOffers?" offer":"");
+    const offerRows=offers.map((offer,i)=>`
+      <div class="offer-row">
+        <div class="offer-number">${i+1}</div>
+        <div class="offer-detail">
+          <b>${esc(offer.title||item.name)}</b>
+          ${offer.brand?`<span>${esc(offer.brand)}</span>`:""}
+          ${offer.valid?`<small>${esc(offer.valid)}</small>`:""}
+        </div>
+        <strong class="offer-price">${esc(offer.price||"")}</strong>
+      </div>`).join("");
+    el.innerHTML=`<input class="check" data-id="${item.id}" type="checkbox" ${item.checked?"checked":""}>
+      <div>
+        <div class="item-name">${esc(item.name)}</div>
+        <div class="meta">
+          <button class="tag ${item.mode}" data-mode="${item.id}">${item.mode==="recurring"?"dauerhaft":"einmalig"}</button>
+          <span class="tag">${item.cat}</span>
+          ${hasOffers?`<span class="tag offer-tag">${offers.length} ${offers.length===1?"ANGEBOT":"ANGEBOTE"}</span>`:""}
+        </div>
+        ${hasOffers?`<div class="offer-list">${offerRows}</div>`:""}
+      </div>
+      ${shopping?"":`<button class="delete" data-delete="${item.id}" aria-label="Löschen">×</button>`}`;
+    return el
+}
 function bind(box,shopping=false){box.querySelectorAll(".check").forEach(b=>b.onchange=e=>{const x=state.items.find(i=>i.id===e.target.dataset.id);if(!x)return;x.checked=e.target.checked;save();render()});box.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{const x=state.items.find(i=>i.id===b.dataset.mode);x.mode=x.mode==="once"?"recurring":"once";save();render()});box.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>{state.items=state.items.filter(i=>i.id!==b.dataset.delete);delete state.offers[b.dataset.delete];save();render();scheduleOffers()})}
 function renderList(){const box=$("#items");box.innerHTML="";state.items.forEach(x=>box.append(itemNode(x,false)));bind(box);$("#emptyState").style.display=state.items.length?"none":"grid"}
 function renderShop(){const box=$("#shopItems");box.innerHTML="";sortedItems().forEach(x=>box.append(itemNode(x,true)));bind(box,true);const done=state.items.filter(x=>x.checked).length,total=state.items.length,pct=total?Math.round(done/total*100):0;$("#progressText").textContent=`${done} von ${total} erledigt`;$("#progressPct").textContent=pct+"%";$("#progressBar").style.width=pct+"%";$("#shopStore").textContent=currentStore().name+" · "+currentStore().address}
-function renderStores(){const sel=$("#storeSelect");if(!sel.dataset.ready){let groups=[...new Set(STORES.map(s=>s.group))];sel.innerHTML=groups.map(g=>`<optgroup label="${g}">${STORES.filter(s=>s.group===g).map(s=>`<option value="${s.id}">${s.name} · ${s.address}</option>`).join("")}</optgroup>`).join("");sel.dataset.ready="1"}sel.value=state.store;$("#storeName").textContent=currentStore().name+" · "+currentStore().address;$("#routePreview").innerHTML=route().map(x=>`<span>${x}</span>`).join("");let hits=Object.values(state.offers||{}).filter(a=>a?.length).length;const supported=!!currentStore().retailer;$("#offerSummary").textContent=!supported?"Für diesen unabhängigen Markt ist derzeit keine automatische Angebotsquelle hinterlegt.":hits?`${hits} Artikel deiner Liste haben aktuell einen Online-Angebotstreffer.`:"Aktuell keine passenden Online-Angebotstreffer geladen."}
+function renderStores(){const sel=$("#storeSelect");if(!sel.dataset.ready){let groups=[...new Set(STORES.map(s=>s.group))];sel.innerHTML=groups.map(g=>`<optgroup label="${g}">${STORES.filter(s=>s.group===g).map(s=>`<option value="${s.id}">${s.name} · ${s.address}</option>`).join("")}</optgroup>`).join("");sel.dataset.ready="1"}sel.value=state.store;$("#storeName").textContent=currentStore().name+" · "+currentStore().address;$("#routePreview").innerHTML=route().map(x=>`<span>${x}</span>`).join("");let matchedItems=Object.values(state.offers||{}).filter(a=>a?.length).length,totalOffers=Object.values(state.offers||{}).reduce((n,a)=>n+(a?.length||0),0);const supported=!!currentStore().retailer;$("#offerSummary").textContent=!supported?"Für diesen unabhängigen Markt ist derzeit keine automatische Angebotsquelle hinterlegt.":matchedItems?`${totalOffers} passende Angebote für ${matchedItems} Artikel deiner Liste gefunden.`:"Aktuell keine passenden Online-Angebote gefunden."}
 function render(){renderList();renderShop();renderStores()}
 function addItems(){const raw=$("#itemInput").value.trim();if(!raw)return;raw.split(/,|;|\n/).map(x=>x.trim()).filter(Boolean).forEach(name=>state.items.push({id:crypto.randomUUID(),name:name.charAt(0).toUpperCase()+name.slice(1),cat:infer(name),mode:"once",checked:false}));$("#itemInput").value="";save();render();scheduleOffers()}
 let offerTimer;
@@ -37,3 +62,66 @@ $("#saveRouteBtn").onclick=()=>{state.routes[state.store]=[...editing];save();re
 $("#exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify({version:12,data:state},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="rethink-einkauf-backup.json";a.click();URL.revokeObjectURL(a.href)};
 $("#importInput").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const b=JSON.parse(await f.text());if(!b.data?.items||!b.data?.routes)throw 0;state=b.data;save();render();scheduleOffers();alert("Backup wiederhergestellt.")}catch(_){alert("Backup konnte nicht gelesen werden.")}e.target.value=""};
 render();
+
+// --- PWA update flow ---
+let pendingServiceWorker = null;
+
+function showUpdateBanner(worker){
+  pendingServiceWorker = worker || pendingServiceWorker;
+  const banner = document.querySelector("#updateBanner");
+  if (banner) banner.hidden = false;
+}
+
+function hideUpdateBanner(){
+  const banner = document.querySelector("#updateBanner");
+  if (banner) banner.hidden = true;
+}
+
+async function registerPwaUpdates(){
+  if (!("serviceWorker" in navigator)) return;
+
+  try {
+    const reg = await navigator.serviceWorker.register("./sw.js");
+
+    // Existing waiting worker means an update is already ready.
+    if (reg.waiting) showUpdateBanner(reg.waiting);
+
+    reg.addEventListener("updatefound", () => {
+      const installing = reg.installing;
+      if (!installing) return;
+
+      installing.addEventListener("statechange", () => {
+        if (installing.state === "installed" && navigator.serviceWorker.controller) {
+          showUpdateBanner(installing);
+        }
+      });
+    });
+
+    // Check periodically while app is open.
+    setInterval(() => reg.update().catch(() => {}), 15 * 60 * 1000);
+
+    // Also re-check whenever the app returns to foreground.
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") reg.update().catch(() => {});
+    });
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      window.location.reload();
+    });
+
+    const updateBtn = document.querySelector("#updateNowBtn");
+    if (updateBtn) {
+      updateBtn.addEventListener("click", () => {
+        if (pendingServiceWorker) {
+          pendingServiceWorker.postMessage({type:"SKIP_WAITING"});
+          updateBtn.disabled = true;
+          updateBtn.textContent = "Aktualisiere …";
+        }
+      });
+    }
+  } catch (err) {
+    console.warn("Service-Worker-Update konnte nicht registriert werden:", err);
+  }
+}
+registerPwaUpdates();
+

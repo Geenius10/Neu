@@ -1,1 +1,40 @@
-const C='rethink-einkauf-v14';const ASSETS=['./','./styles.css','./app.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(ASSETS))));self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==C).map(k=>caches.delete(k))))));self.addEventListener('fetch',e=>{if(e.request.url.includes('/api/'))return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))})
+const CACHE="rethink-einkauf-v16";
+const ASSETS=["./","./styles.css","./app.js","./manifest.webmanifest","./icon-192.png","./icon-512.png"];
+
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(CACHE).then(cache => cache.addAll(ASSETS))
+  );
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))
+    ).then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("message", event => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+self.addEventListener("fetch", event => {
+  const url = new URL(event.request.url);
+
+  if (url.pathname.startsWith("/api/")) {
+    return;
+  }
+
+  event.respondWith(
+    fetch(event.request)
+      .then(response => {
+        const copy = response.clone();
+        caches.open(CACHE).then(cache => cache.put(event.request, copy));
+        return response;
+      })
+      .catch(() => caches.match(event.request))
+  );
+});
