@@ -192,3 +192,31 @@ main{width:min(760px,100%);margin:auto;padding:18px max(14px,env(safe-area-inset
   background:#dcece2;
   color:#173b2c;
 }
+
+.route-row-manage{
+  grid-template-columns:34px minmax(0,1fr) 44px;
+  cursor:grab;
+  user-select:none;
+}
+.drag-handle{
+  display:grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  border-radius:9px;
+  background:#eef3ef;
+  color:#66756b;
+  font-size:1rem;
+}
+.route-row.dragging{opacity:.45}
+.route-row.drag-over{
+  border-color:#7fae91;
+  box-shadow:0 0 0 3px rgba(127,174,145,.14);
+}
+.route-row.route-selected{
+  border-color:#5d9875;
+  background:#edf7f0;
+}
+@media(max-width:560px){
+  .route-row-manage{grid-template-columns:34px minmax(0,1fr) 40px}
+}

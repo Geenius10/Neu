@@ -1,5 +1,5 @@
 const STORES=[{"id": "edeka-center-otto", "group": "EDEKA", "name": "E center Schneidermarkt", "address": "Otto-Hahn-Straße 1, 95447 Bayreuth", "retailer": "edeka-center"}, {"id": "edeka-gravenreuth", "group": "EDEKA", "name": "EDEKA Schneidermarkt", "address": "Gravenreuther Straße 19, 95445 Bayreuth", "retailer": "edeka"}, {"id": "edeka-meran", "group": "EDEKA", "name": "EDEKA Schneidermarkt", "address": "Meranierring 2, 95445 Bayreuth", "retailer": "edeka"}, {"id": "edeka-pensel", "group": "EDEKA", "name": "EDEKA Pensel", "address": "Königsallee 45, 95448 Bayreuth", "retailer": "edeka"}, {"id": "edeka-center-riedinger", "group": "EDEKA", "name": "E center Schneidermarkt", "address": "Riedingerstraße 21, 95448 Bayreuth", "retailer": "edeka-center"}, {"id": "nahgut-troeger", "group": "EDEKA", "name": "nah & gut Tröger", "address": "Eichendorffring 1, 95447 Bayreuth", "retailer": "edeka-nah-gut"}, {"id": "rewe-justus", "group": "REWE", "name": "REWE", "address": "Justus-Liebig-Str. 8, 95447 Bayreuth", "retailer": "rewe"}, {"id": "rewe-kanal", "group": "REWE", "name": "REWE", "address": "Kanalstr. 15–17, 95444 Bayreuth", "retailer": "rewe"}, {"id": "rewe-friedrich", "group": "REWE", "name": "REWE", "address": "Friedrichstr. 53, 95444 Bayreuth", "retailer": "rewe"}, {"id": "rewe-spinnerei", "group": "REWE", "name": "REWE", "address": "Spinnereistr. 7–13, 95445 Bayreuth", "retailer": "rewe"}, {"id": "rewe-bamberger", "group": "REWE", "name": "REWE", "address": "Bamberger Str. 32, 95445 Bayreuth", "retailer": "rewe"}, {"id": "nahkauf-friedrich-ebert", "group": "REWE", "name": "nahkauf", "address": "Friedrich-Ebert-Str. 14, 95448 Bayreuth", "retailer": "nahkauf"}, {"id": "nahkauf-carl-burger", "group": "REWE", "name": "nahkauf", "address": "Carl-Burger-Str. 8, 95445 Bayreuth", "retailer": "nahkauf"}, {"id": "nahkauf-preuschwitz", "group": "REWE", "name": "nahkauf", "address": "Preuschwitzer Str. 23, 95445 Bayreuth", "retailer": "nahkauf"}, {"id": "rewe-express-hindenburg", "group": "REWE", "name": "REWE express", "address": "Hindenburgstraße 4, 95445 Bayreuth", "retailer": "rewe"}, {"id": "lidl-adolf", "group": "Lidl", "name": "Lidl", "address": "Adolf-Wächter-Str. 1, 95447 Bayreuth", "retailer": "lidl"}, {"id": "lidl-meran", "group": "Lidl", "name": "Lidl", "address": "Meranierring 49, 95445 Bayreuth", "retailer": "lidl"}, {"id": "lidl-nuernberg", "group": "Lidl", "name": "Lidl", "address": "Nürnberger Str. 3a, 95448 Bayreuth", "retailer": "lidl"}, {"id": "lidl-riedinger", "group": "Lidl", "name": "Lidl", "address": "Riedingerstraße 21, 95448 Bayreuth", "retailer": "lidl"}, {"id": "aldi-tunnel", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Tunnelstraße 11, 95448 Bayreuth", "retailer": "aldi-sued"}, {"id": "aldi-otto", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Otto-Hahn-Straße 1a, 95447 Bayreuth", "retailer": "aldi-sued"}, {"id": "aldi-himmelkron", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Himmelkronstraße 1, 95445 Bayreuth", "retailer": "aldi-sued"}, {"id": "aldi-theodor", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Theodor-Schmidt-Straße 12, 95448 Bayreuth", "retailer": "aldi-sued"}, {"id": "aldi-nuernberg", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Nürnberger Str. 96, 95448 Bayreuth", "retailer": "aldi-sued"}, {"id": "netto-leuschner", "group": "Netto", "name": "Netto Marken-Discount", "address": "Leuschnerstraße 84, 95447 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-koenigsallee", "group": "Netto", "name": "Netto Marken-Discount", "address": "Königsallee 47, 95448 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-bamberger", "group": "Netto", "name": "Netto Marken-Discount", "address": "Bamberger Str. 38, 95445 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-spinnerei", "group": "Netto", "name": "Netto Marken-Discount", "address": "Spinnereistraße 7, 95445 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-richard", "group": "Netto", "name": "Netto Marken-Discount", "address": "Richard-Wagner-Straße 17, 95444 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-nuernberg", "group": "Netto", "name": "Netto Marken-Discount", "address": "Nürnberger Str. 37, 95447 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "norma-kanal", "group": "NORMA", "name": "NORMA", "address": "Kanalstraße 17, 95444 Bayreuth", "retailer": "norma"}, {"id": "norma-spitzweg", "group": "NORMA", "name": "NORMA", "address": "Spitzwegstraße 59, 95447 Bayreuth", "retailer": "norma"}, {"id": "norma-bauhof", "group": "NORMA", "name": "NORMA", "address": "Am Bauhof 4, 95445 Bayreuth", "retailer": "norma"}, {"id": "norma-kemnather", "group": "NORMA", "name": "NORMA", "address": "Kemnather Str. 29, 95448 Bayreuth", "retailer": "norma"}, {"id": "kaufland-weiher", "group": "Kaufland", "name": "Kaufland Bayreuth", "address": "Weiherstraße 27, 95448 Bayreuth", "retailer": "kaufland"}, {"id": "sultan-weiher", "group": "Weitere", "name": "sultan Markt Bayreuth", "address": "Weiherstraße 1, 95448 Bayreuth", "retailer": null}, {"id": "fruchtgarten", "group": "Weitere", "name": "Fruchtgarten Bayreuth GmbH", "address": "Ritter-von-Eitzenberger-Straße 9, 95448 Bayreuth", "retailer": null}];
-const BASE_ROUTE=["Obst & Gemüse","Backwaren","Frischetheke Fleisch & Wurst","Frischetheke Käse & Feinkost","Kühlung Milchprodukte","Kühlung Convenience","Vorrat Frühstück & Brotaufstrich","Vorrat Nudeln, Reis & Hülsenfrüchte","Vorrat Konserven & Saucen","Gewürze","Essig & Öl","Backen","Süßwaren & Snacks","Getränke alkoholfrei","Getränke alkoholisch","Tiefkühlung","Drogerie & Körperpflege","Haushalt & Reinigung","Tiernahrung","Baby & Familie","Zeitschriften & Presse","Tabak & Raucherbedarf","Aktionsware / Non-Food","Kasse / Impulsware","Sonstiges"];
+const BASE_ROUTE=["Aktionsware / Non-Food", "Baby & Familie", "Backen", "Backwaren", "Drogerie & Körperpflege", "Essig & Öl", "Frischetheke Fleisch & Wurst", "Frischetheke Käse & Feinkost", "Getränke alkoholfrei", "Getränke alkoholisch", "Gewürze", "Haushalt & Reinigung", "Kasse / Impulsware", "Kühlung Convenience", "Kühlung Milchprodukte", "Obst & Gemüse", "Sonstiges", "Süßwaren & Snacks", "Tabak & Raucherbedarf", "Tiefkühlung", "Tiernahrung", "Vorrat Frühstück & Brotaufstrich", "Vorrat Konserven & Saucen", "Vorrat Nudeln, Reis & Hülsenfrüchte", "Zeitschriften & Presse"];
 const CATEGORY_KEYWORDS={
 "Obst & Gemüse":["banan","apfel","aepfel","birne","orange","mandarine","zitrone","limette","traube","weintraube","erdbeer","himbeer","heidelbeer","beere","kiwi","mango","ananas","melone","pfirsich","nektarine","pflaume","zwetschge","tomate","gurke","paprika","zucchini","aubergine","karotte","moehre","möhre","kartoffel","zwiebel","knoblauch","salat","spinat","brokkoli","blumenkohl","kohl","champignon","pilz","avocado","kraeuter","kräuter","obst","gemuese","gemüse"],
 "Backwaren":["brot","broetchen","brötchen","toast","baguette","ciabatta","croissant","brezel","semmel","backware","kuchen","muffin","donut","teilchen"],
@@ -60,7 +60,7 @@ function emptyState(){
 }
 function load(){
   try{
-    const x=JSON.parse(localStorage.getItem("rethink-einkauf-v24"));
+    const x=JSON.parse(localStorage.getItem("rethink-einkauf-v25"));
     if(x?.items&&x?.routes){
       x.hiddenCategories=x.hiddenCategories||{};
       x.compareStore=x.compareStore||"";
@@ -77,7 +77,7 @@ let state=load();
 let editing=[];
 let offerTimer=null;
 
-function save(){localStorage.setItem("rethink-einkauf-v24",JSON.stringify(state));}
+function save(){localStorage.setItem("rethink-einkauf-v25",JSON.stringify(state));}
 function currentStore(){return STORES.find(s=>s.id===state.store)||STORES[0];}
 function compareStore(){return STORES.find(s=>s.id===state.compareStore)||null;}
 function hiddenForStore(){return new Set(state.hiddenCategories?.[state.store]||[]);}
@@ -100,7 +100,9 @@ function sortedItems(){
   const o=route();
   return [...state.items].sort((a,b)=>{
     const ai=o.indexOf(a.cat),bi=o.indexOf(b.cat);
-    return (ai<0?999:ai)-(bi<0?999:bi);
+    const ca=ai<0?999:ai, cb=bi<0?999:bi;
+    if(ca!==cb)return ca-cb;
+    return a.name.localeCompare(b.name,"de",{sensitivity:"base"});
   });
 }
 function offersFor(item){return state.offers?.[item.id]||[];}
@@ -194,7 +196,14 @@ function bindList(box){
 }
 function renderList(){
   const box=$("#items"); if(!box)return;
-  box.innerHTML=""; state.items.forEach(x=>box.append(itemNode(x,false))); bindList(box);
+  box.innerHTML="";
+  [...state.items]
+    .sort((a,b)=>{
+      const c=a.cat.localeCompare(b.cat,"de",{sensitivity:"base"});
+      return c!==0?c:a.name.localeCompare(b.name,"de",{sensitivity:"base"});
+    })
+    .forEach(x=>box.append(itemNode(x,false)));
+  bindList(box);
   const empty=$("#emptyState"); if(empty) empty.style.display=state.items.length?"none":"grid";
 }
 function renderShop(){
@@ -232,23 +241,75 @@ function addItems(){
 }
 function renderRouteEditor(){
   const box=$("#routeEditor"); if(!box)return;
-  box.innerHTML=editing.map((c,i)=>`<div class="route-row route-row-manage"><b>${esc(c)}</b><button data-up="${i}">↑</button><button data-down="${i}">↓</button><button class="hide-cat" data-hide="${esc(c)}">×</button></div>`).join("");
-  box.querySelectorAll("[data-up]").forEach(b=>b.onclick=()=>move(+b.dataset.up,-1));
-  box.querySelectorAll("[data-down]").forEach(b=>b.onclick=()=>move(+b.dataset.down,1));
+  box.innerHTML=editing.map((c,i)=>`
+    <div class="route-row route-row-manage" draggable="true" data-route-index="${i}">
+      <span class="drag-handle" aria-hidden="true">☰</span>
+      <b>${esc(c)}</b>
+      <button class="hide-cat" data-hide="${esc(c)}" title="Kategorie ausblenden">×</button>
+    </div>`).join("");
+
+  let dragFrom=null;
+
+  box.querySelectorAll("[data-route-index]").forEach(row=>{
+    row.addEventListener("dragstart",()=>{
+      dragFrom=Number(row.dataset.routeIndex);
+      row.classList.add("dragging");
+    });
+    row.addEventListener("dragend",()=>{
+      row.classList.remove("dragging");
+      dragFrom=null;
+    });
+    row.addEventListener("dragover",e=>{
+      e.preventDefault();
+      row.classList.add("drag-over");
+    });
+    row.addEventListener("dragleave",()=>row.classList.remove("drag-over"));
+    row.addEventListener("drop",e=>{
+      e.preventDefault();
+      row.classList.remove("drag-over");
+      const to=Number(row.dataset.routeIndex);
+      if(dragFrom===null||dragFrom===to)return;
+      const [moved]=editing.splice(dragFrom,1);
+      editing.splice(to,0,moved);
+      state.routes[state.store]=[...editing];
+      save();
+      renderRouteEditor();
+      render();
+    });
+
+    row.querySelector(".drag-handle")?.addEventListener("click",()=>{
+      const selected=box.querySelector(".route-selected");
+      if(selected){
+        const from=Number(selected.dataset.routeIndex);
+        const to=Number(row.dataset.routeIndex);
+        selected.classList.remove("route-selected");
+        if(from!==to){
+          const [moved]=editing.splice(from,1);
+          editing.splice(to,0,moved);
+          state.routes[state.store]=[...editing];
+          save();
+          renderRouteEditor();
+          render();
+        }
+      }else{
+        row.classList.add("route-selected");
+      }
+    });
+  });
+
   box.querySelectorAll("[data-hide]").forEach(b=>b.onclick=()=>{
     const cat=b.dataset.hide;
-    const h=new Set(state.hiddenCategories[state.store]||[]); h.add(cat); state.hiddenCategories[state.store]=[...h];
-    editing=editing.filter(x=>x!==cat); state.routes[state.store]=[...editing]; save(); renderRouteEditor(); render();
+    const hidden=new Set(state.hiddenCategories[state.store]||[]);
+    hidden.add(cat);
+    state.hiddenCategories[state.store]=[...hidden];
+    editing=editing.filter(x=>x!==cat);
+    state.routes[state.store]=[...editing];
+    save();
+    renderRouteEditor();
+    render();
   });
 }
-function move(i,d){const j=i+d;if(j<0||j>=editing.length)return;[editing[i],editing[j]]=[editing[j],editing[i]];renderRouteEditor();}
-function scheduleOffers(){clearTimeout(offerTimer);offerTimer=setTimeout(loadOffers,300);}
-async function fetchStoreOffers(store){
-  if(!store?.retailer||!state.items.length)return {};
-  const r=await fetch("/api/match-offers",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({retailer:store.retailer,items:state.items.map(x=>({id:x.id,name:x.name}))})});
-  if(!r.ok)throw new Error();
-  return (await r.json()).matches||{};
-}
+
 async function loadOffers(){
   if(!state.items.length)return;
   const sync=$("#syncState"); if(sync)sync.textContent="Angebote werden aktualisiert …";
@@ -273,7 +334,16 @@ function wire(){
   document.querySelectorAll(".back").forEach(b=>b.addEventListener("click",()=>{const s=b.dataset.screen;show(s,s==="list"?"Einkaufsliste":s==="store"?"Filiale wählen":"RETHINK.einkauf");}));
   $("#editRouteBtn")?.addEventListener("click",()=>{editing=[...route()];renderRouteEditor();show("route","Laufweg anpassen");});
   $("#saveRouteBtn")?.addEventListener("click",()=>{state.routes[state.store]=[...editing];save();render();show("store","Filiale wählen");});
-  $("#resetCategoriesBtn")?.addEventListener("click",()=>{state.hiddenCategories[state.store]=[];state.routes[state.store]=[...BASE_ROUTE];editing=[...BASE_ROUTE];save();render();alert("Kategorien wurden zurückgesetzt.");});
+  $("#resetCategoriesBtn")?.addEventListener("click",()=>{
+    const current=state.routes[state.store] ? [...state.routes[state.store]] : [...route()];
+    const missing=BASE_ROUTE.filter(cat=>!current.includes(cat));
+    state.hiddenCategories[state.store]=[];
+    state.routes[state.store]=[...current,...missing];
+    editing=[...state.routes[state.store]];
+    save();
+    render();
+    alert("Fehlende Kategorien wurden unten an deinen bestehenden Laufweg angehängt.");
+  });
   const toggle=$("#priceCompareToggle"); if(toggle){toggle.checked=!!state.settings?.priceComparison;toggle.addEventListener("change",()=>{state.settings.priceComparison=toggle.checked;save();render();});}
   $("#exportBtn")?.addEventListener("click",()=>{const blob=new Blob([JSON.stringify({version:21,data:state},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="rethink-einkauf-backup.json";a.click();URL.revokeObjectURL(a.href);});
   $("#importInput")?.addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;try{const b=JSON.parse(await f.text());if(!b.data?.items||!b.data?.routes)throw 0;state=b.data;save();render();scheduleOffers();alert("Backup wiederhergestellt.");}catch(_){alert("Backup konnte nicht gelesen werden.");}e.target.value="";});

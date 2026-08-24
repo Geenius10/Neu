@@ -119,3 +119,13 @@ v24 – dezente Kategorieänderung
 - Keine Dropdown-Pfeile oder dauerhafte Auswahlbox.
 - Tippen auf den Kategorie-Tag öffnet erst dann die Kategorienauswahl.
 - Auswahl erscheint mobilfreundlich als kompakte Bottom-Sheet-Auswahl.
+
+
+v25 – Drag & Drop und sauberer Kategorien-Reset
+------------------------------------------------
+- Standard-Kategorien alphabetisch sortiert.
+- Artikel innerhalb einer Kategorie alphabetisch nach Namen sortiert.
+- Laufweg-Kategorien per Drag & Drop sortierbar.
+- Touch-Fallback: Griff antippen, dann Zielposition antippen.
+- Kategorien zurücksetzen verändert die vorhandene Reihenfolge nicht.
+- Fehlende Kategorien werden nur unten an den bestehenden Laufweg angehängt.
