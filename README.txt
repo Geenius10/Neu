@@ -1,32 +1,33 @@
-Einkaufsweg v12 – Bayreuth Pilot
+RETHINK.einkauf v14 – Deployment-ready
 
-Status:
-Keine Demo-Artikel und keine erfundenen Rabatte mehr.
-Die App startet leer. Angebotsinformationen werden ausschließlich durch den Online-Abgleich erzeugt.
-
-Projektstruktur:
-Alle Dateien liegen absichtlich gemeinsam in EINEM Ordner:
-- index.html
-- styles.css
-- app.js
-- server.py
-- requirements.txt
-- manifest.webmanifest
-- sw.js
-- icon-192.png
-- icon-512.png
-- README.txt
-
-Start:
+Lokaler Start
+-------------
 pip install -r requirements.txt
 python server.py
-Danach http://localhost:8000 öffnen.
+Dann http://localhost:8000 öffnen.
 
-Die Filialliste enthält die aktuell recherchierten Bayreuther Standorte der großen Ketten
-einschließlich EDEKA/E center, nah & gut, REWE, nahkauf, Lidl, ALDI SÜD, Netto, NORMA,
-Kaufland sowie einige weitere lokale Lebensmittelmärkte.
+Deployment mit GitHub + Render
+-------------------------------
+1. Alle Dateien dieses Ordners in ein neues GitHub-Repository hochladen.
+2. Render öffnen und GitHub verbinden.
+3. New + > Web Service wählen.
+4. Repository auswählen.
+5. Render kann die beiliegende render.yaml verwenden.
 
-Wichtig:
-Dies ist eine Pilot-/MVP-Version, kein produktionsreifes Release. Für Produktion fehlen u.a.
-dauerhaft belastbare Angebots-Datenvereinbarung/API, Hosting, Monitoring, Datenschutzkonzept,
-Sicherheits-/Lasttests und echte Multi-Device-Synchronisierung.
+Build Command:
+pip install -r requirements.txt
+
+Start Command:
+gunicorn server:app
+
+Health Check:
+ /health
+
+Nach dem Deployment erhältst du eine öffentliche HTTPS-Adresse.
+Diese auf iPhone oder Android öffnen und zum Homescreen hinzufügen.
+
+Hinweis zu Angeboten
+--------------------
+Die PWA und das Backend sind online-fähig vorbereitet. Für dauerhaft produktive
+Angebotsdaten sollte zusätzlich geprüft werden, ob die verwendete Datenquelle
+automatisierte Abrufe dauerhaft technisch und rechtlich erlaubt.

@@ -4,9 +4,9 @@ const RULES=[[/banane|apfel|äpfel|tomate|gurke|kartoffel|salat|zwiebel|paprika|
 const $=s=>document.querySelector(s);
 function infer(name){const l=name.toLowerCase();for(const [r,c] of RULES)if(r.test(l))return c;return"Sonstiges"}
 function emptyState(){return {items:[],routes:{},store:"edeka-center-otto",offers:{}}}
-function load(){try{const x=JSON.parse(localStorage.getItem("einkaufsweg-v12"));if(x?.items&&x?.routes)return x}catch(e){}return emptyState()}
+function load(){try{const x=JSON.parse(localStorage.getItem("rethink-einkauf-v14"));if(x?.items&&x?.routes)return x}catch(e){}return emptyState()}
 let state=load(),editing=[];
-function save(){localStorage.setItem("einkaufsweg-v12",JSON.stringify(state))}
+function save(){localStorage.setItem("rethink-einkauf-v14",JSON.stringify(state))}
 function currentStore(){return STORES.find(s=>s.id===state.store)||STORES[0]}
 function route(){return state.routes[state.store]||BASE_ROUTE}
 function esc(s=""){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}
@@ -34,6 +34,6 @@ $("#editRouteBtn").onclick=()=>{editing=[...route()];renderRouteEditor();show("r
 function renderRouteEditor(){$("#routeEditor").innerHTML=editing.map((c,i)=>`<div class="route-row"><b>${c}</b><button data-up="${i}">↑</button><button data-down="${i}">↓</button></div>`).join("");$("#routeEditor").querySelectorAll("[data-up]").forEach(b=>b.onclick=()=>move(+b.dataset.up,-1));$("#routeEditor").querySelectorAll("[data-down]").forEach(b=>b.onclick=()=>move(+b.dataset.down,1))}
 function move(i,d){const j=i+d;if(j<0||j>=editing.length)return;[editing[i],editing[j]]=[editing[j],editing[i]];renderRouteEditor()}
 $("#saveRouteBtn").onclick=()=>{state.routes[state.store]=[...editing];save();render();show("store","Filiale wählen")};
-$("#exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify({version:12,data:state},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="einkaufsweg-backup.json";a.click();URL.revokeObjectURL(a.href)};
+$("#exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify({version:12,data:state},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="rethink-einkauf-backup.json";a.click();URL.revokeObjectURL(a.href)};
 $("#importInput").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const b=JSON.parse(await f.text());if(!b.data?.items||!b.data?.routes)throw 0;state=b.data;save();render();scheduleOffers();alert("Backup wiederhergestellt.")}catch(_){alert("Backup konnte nicht gelesen werden.")}e.target.value=""};
 render();

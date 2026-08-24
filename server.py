@@ -60,6 +60,10 @@ def parse_offers(html,retailer_slug):
             seen.add(k);result.append(x)
     return result[:20]
 
+@app.get("/health")
+def health():
+    return jsonify({"status":"ok","app":"RETHINK.einkauf"})
+
 @app.get("/")
 def home():
     return send_from_directory(ROOT,"index.html")
@@ -85,4 +89,6 @@ def match_offers():
     return jsonify({"matches":matches,"source":"marktguru.de","cached_seconds":TTL})
 
 if __name__=="__main__":
-    app.run(host="0.0.0.0",port=8000,debug=False)
+    import os
+    port=int(os.environ.get("PORT","8000"))
+    app.run(host="0.0.0.0",port=port,debug=False)
