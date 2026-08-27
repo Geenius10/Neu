@@ -22,5 +22,5 @@
   ],
   "scope": "./",
   "id": "./",
-  "description": "Einkaufslisten nach Filial-Laufweg sortieren und passende Angebote automatisch hervorheben."
+  "description": "Smarte Einkaufsliste mit lernenden Filial-Laufwegen."
 }

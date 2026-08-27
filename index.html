@@ -1,85 +1,11 @@
-<!doctype html><html lang="de"><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#102d22">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./icon-192.png">
-<link rel="stylesheet" href="./styles.css">
-<title>RETHINK.einkauf</title><style id="css-fallback">
-        body{margin:0;background:#edf2ed;color:#112019;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-        header{background:#102d22;color:white;padding:16px}
-        main{max-width:760px;margin:auto;padding:16px}
-        </style></head><body>
-<header class="appbar">
-  <div class="brand"><span class="mark">🛒</span><div><small>RETHINK.EINKAUF</small><h1 id="screenTitle">Einkaufsliste</h1></div></div>
-  <button id="settingsBtn" class="iconbtn" aria-label="Einstellungen">⚙</button>
-</header>
-<div id="updateBanner" class="update-banner" hidden>
-  <div>
-    <b>Neue Version verfügbar</b>
-    <span>RETHINK.einkauf wurde aktualisiert.</span>
-  </div>
-  <button id="updateNowBtn" class="update-btn">Jetzt aktualisieren</button>
-</div>
-
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#102d22"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-192.png"><link rel="stylesheet" href="./styles.css"><title>RETHINK.einkauf</title></head><body>
+<header class="appbar"><div class="brand"><span class="mark">🛒</span><div><small>RETHINK.EINKAUF</small><h1 id="screenTitle">Einkaufsliste</h1></div></div></header>
+<div id="updateBanner" class="update-banner" hidden><div><b>Neue Version verfügbar</b><span>RETHINK.einkauf wurde aktualisiert.</span></div><button id="updateNowBtn" class="update-btn">Jetzt aktualisieren</button></div>
 <main>
-<section id="listScreen" class="screen active">
-  <div class="hero-copy"><span class="step">01</span><div><h2>Was brauchst du?</h2><p>Deine Liste ist unabhängig vom Markt. Erst danach wird sie für die Filiale sortiert.</p></div></div>
-  <div class="composer"><input id="itemInput" autocomplete="off" placeholder="Milch, Bananen, Nudeln …"><button id="addBtn" class="primary">Hinzufügen</button></div>
-  <div id="syncState" class="sync"></div>
-  <div id="emptyState" class="empty"><div class="empty-icon">＋</div><b>Deine Liste ist leer</b><span>Füge oben den ersten Artikel hinzu.</span></div>
-  <div id="items" class="items"></div>
-  <button id="chooseStoreBtn" class="primary action">Filiale wählen <span>→</span></button>
-</section>
-
-<section id="storeScreen" class="screen">
-  <button class="back" data-screen="list">← Einkaufsliste</button>
-  <div class="hero-copy"><span class="step">02</span><div><h2>Wo kaufst du ein?</h2><p>Filiale wechseln ändert nur Reihenfolge und echte Angebots-Treffer.</p></div></div>
-  <div class="store-pair"><div class="field"><label for="storeSelect">Hauptfiliale</label><select id="storeSelect"></select></div><div class="field"><label for="compareStoreSelect">Optionale Vergleichsfiliale</label><select id="compareStoreSelect"><option value="">Keine zweite Filiale</option></select></div></div>
-  <div id="offerSummary" class="notice">Angebote werden automatisch geprüft.</div>
-  <div class="card">
-    <div class="card-head"><div><small>DEIN LAUFWEG</small><b id="storeName"></b></div><button id="editRouteBtn" class="mini">Anpassen</button></div>
-    <div id="routePreview" class="route"></div>
-  </div>
-  <div id="compareRouteCard" class="card" hidden>
-    <div class="card-head"><div><small>ZWEITE FILIALE · LAUFWEG</small><b id="compareStoreName"></b></div><button id="editCompareRouteBtn" class="mini">Anpassen</button></div>
-    <div id="compareRoutePreview" class="route"></div>
-  </div>
-  <button id="startBtn" class="primary action">Einkauf starten <span>→</span></button>
-</section>
-
-<section id="shopScreen" class="screen">
-  <button class="back" data-screen="store">← Filiale wechseln</button>
-  <span id="shopStore" class="store-kicker"></span><h2 id="shopHeading">Dein Laufweg</h2><div id="shopStageHint" class="notice" hidden></div>
-  <div class="progress-head"><span id="progressText"></span><b id="progressPct">0%</b></div>
-  <div class="progress"><div id="progressBar"></div></div>
-  <div id="shopItems" class="items"></div>
-  <button id="finishBtn" class="primary action">Einkauf abschließen ✓</button>
-</section>
-
-<section id="routeScreen" class="screen">
-  <button class="back" data-screen="store">← Filiale</button>
-  <h2>Laufweg anpassen</h2><p>Speichere die echte Reihenfolge dieser Filiale. Deine Einkaufsliste bleibt unberührt.</p>
-  <div id="routeEditor" class="route-editor"></div>
-  <button id="saveRouteBtn" class="primary action">Laufweg speichern</button>
-</section>
-
-<section id="settingsScreen" class="screen">
-  <button class="back" data-screen="list">← Zurück</button><h2>Einstellungen</h2>
-  <div class="card"><h3>Backup</h3><p>Liste und gelernte Laufwege lokal sichern.</p>
-    <button id="exportBtn" class="secondary full">Backup erstellen</button>
-    <label class="filebtn full">Backup wiederherstellen<input id="importInput" type="file" accept="application/json"></label>
-  </div>
-  <div class="card"><div class="setting-row"><div><h3>Preisvergleich</h3><p>Optional Preise pro Produkt und Filiale merken. Frühere Eingaben bleiben gespeichert.</p></div><label class="switch"><input id="priceCompareToggle" type="checkbox"><span class="slider"></span></label></div></div><div class="card"><h3>Angebote</h3><p>Es gibt keine vorgetäuschten Preise. Ein Angebots-Badge erscheint ausschließlich bei einem Treffer des Online-Dienstes.</p></div>
-
-  <div class="card">
-    <h3>Laufweg-Kategorien</h3>
-    <p>Ausgeblendete Kategorien bleiben pro Filiale gespeichert. Hier kannst du alle Kategorien der aktuell gewählten Filiale wiederherstellen.</p>
-    <button id="resetCategoriesBtn" class="secondary full">Kategorien zurücksetzen</button>
-  </div>
-
-</section>
-</main>
-<script src="./app.js"></script></body></html>
+<section id="listScreen" class="screen active"><div class="hero-copy"><span class="step">01</span><div><h2>Was brauchst du?</h2><p>Ohne Haken = benötigt. Haken = aktuell nicht benötigt.</p></div></div><div class="composer"><input id="itemInput" autocomplete="off" placeholder="Milch, Bananen, Nudeln …"><button id="addBtn" class="primary">Hinzufügen</button></div><div id="syncState" class="sync"></div><div id="emptyState" class="empty"><div class="empty-icon">＋</div><b>Deine Liste ist leer</b><span>Füge oben den ersten Artikel hinzu.</span></div><div id="items" class="items"></div><button id="chooseStoreBtn" class="primary action">Einkauf planen <span>→</span></button></section>
+<section id="planScreen" class="screen"><button class="back" data-screen="list">← Einkaufsliste</button><div class="hero-copy"><span class="step">02</span><div><h2>Filialen wählen</h2><p>Hauptfiliale und optional eine zweite Filiale für die Reste.</p></div></div><div class="store-pair"><div class="field"><label>Hauptfiliale</label><select id="storeSelect"></select></div><div class="field"><label>Zweite Filiale</label><select id="compareStoreSelect"></select></div></div><div id="noStoresNotice" class="notice" hidden>Noch keine Filiale gespeichert. Füge unter „Filialen“ zuerst einen Markt hinzu.</div><div id="offerSummary" class="notice"></div><div id="mainRouteCard" class="card"><div class="card-head"><div><small>LAUFWEG · HAUPTFILIALE</small><b id="storeName"></b><span id="mainLearnState" class="learn-state"></span></div><button id="editRouteBtn" class="mini">Anpassen</button></div><div id="routePreview" class="route"></div></div><div id="compareRouteCard" class="card" hidden><div class="card-head"><div><small>LAUFWEG · ZWEITE FILIALE</small><b id="compareStoreName"></b><span id="compareLearnState" class="learn-state"></span></div><button id="editCompareRouteBtn" class="mini">Anpassen</button></div><div id="compareRoutePreview" class="route"></div></div><button id="startBtn" class="primary action">Einkauf starten <span>→</span></button></section>
+<section id="shopScreen" class="screen"><button class="back" data-screen="plan">← Einkauf planen</button><span id="shopStore" class="store-kicker"></span><h2 id="shopHeading">Dein Laufweg</h2><div id="shopStageHint" class="notice" hidden></div><div class="progress-head"><span id="progressText"></span></div><div class="progress"><div id="progressBar"></div></div><div id="shopItems" class="items"></div><button id="finishBtn" class="primary action">Einkauf abschließen ✓</button></section>
+<section id="storesScreen" class="screen"><div class="hero-copy"><span class="step">★</span><div><h2>Meine Filialen</h2><p>Nur Märkte, die du wirklich nutzt. Neue Filialen findest du online.</p></div></div><div id="myStores" class="my-stores"></div><div class="card"><h3>Filiale online suchen</h3><p class="small-copy">Zum Beispiel „Bayreuth“, „Weidenberg“ oder „dm Bayreuth“.</p><div class="search-row"><input id="storeSearchInput" placeholder="Ort oder Filiale"><button id="storeSearchBtn" class="primary">Suchen</button></div><div id="storeSearchState" class="sync"></div><div id="storeSearchResults" class="store-results"></div></div></section>
+<section id="routeScreen" class="screen"><button class="back" data-screen="plan">← Einkauf planen</button><h2>Laufweg anpassen</h2><p>Ohne manuelle Reihenfolge lernt RETHINK.einkauf aus deiner Abhak-Reihenfolge.</p><div id="routeEditor" class="route-editor"></div><button id="useLearningBtn" class="secondary full">Wieder automatisch lernen</button><button id="saveRouteBtn" class="primary action">Laufweg speichern</button></section>
+<section id="settingsScreen" class="screen"><h2>Einstellungen</h2><div class="card"><div class="setting-row"><div><h3>Preisvergleich</h3><p>Optional Preise pro Produkt und Filiale merken.</p></div><label class="switch"><input id="priceCompareToggle" type="checkbox"><span class="slider"></span></label></div></div><div class="card"><h3>Laufweg-Kategorien</h3><p>Fehlende Kategorien der aktuellen Hauptfiliale werden unten angehängt.</p><button id="resetCategoriesBtn" class="secondary full">Kategorien wiederherstellen</button></div><div class="card"><h3>Backup</h3><p>Liste, Filialen, Laufwege, Lerndaten und Preise sichern.</p><button id="exportBtn" class="secondary full">Backup erstellen</button><label class="filebtn full">Backup wiederherstellen<input id="importInput" type="file" accept="application/json"></label></div><div class="card"><h3>Lerndaten</h3><p>Setzt nur automatisch gelernte Laufwege zurück.</p><button id="resetLearningBtn" class="secondary full">Lerndaten zurücksetzen</button></div></section>
+</main><nav class="bottom-nav"><button data-nav="list" class="nav-active"><span>☑</span>Liste</button><button data-nav="stores"><span>⌖</span>Filialen</button><button data-nav="settings"><span>⚙</span>Einstellungen</button></nav><script src="./app.js"></script></body></html>

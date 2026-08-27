@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parent
 app=Flask(__name__, static_folder=str(ROOT), static_url_path="")
 CACHE={}
 TTL=1800
-HEADERS={"User-Agent":"Mozilla/5.0 (compatible; RETHINK.einkauf/1.7)"}
+HEADERS={"User-Agent":"Mozilla/5.0 (compatible; RETHINK.einkauf/3.0)"}
 
 RETAILER_NAMES={
  "rewe":["REWE"],"nahkauf":["nahkauf"],"lidl":["Lidl"],"aldi-sued":["ALDI SÜD","ALDI Süd"],
@@ -170,6 +170,51 @@ def health():
 @app.get("/")
 def home():
     return send_from_directory(ROOT,"index.html")
+
+
+STORE_SEARCH_CACHE={}
+def infer_store_type(name,tags):
+    n=(name+" "+tags.get("shop","")).lower()
+    return "drugstore" if ("dm " in n or n.startswith("dm") or "drogerie" in n or tags.get("shop")=="chemist") else "supermarket"
+def store_retailer(name):
+    n=name.lower()
+    if "rewe" in n:return "rewe"
+    if "nahkauf" in n:return "nahkauf"
+    if "lidl" in n:return "lidl"
+    if "aldi" in n:return "aldi-sued"
+    if "netto" in n:return "netto-marken-discount"
+    if "norma" in n:return "norma"
+    if "kaufland" in n:return "kaufland"
+    if "edeka" in n or "e center" in n:return "edeka"
+    return None
+def fmt_addr(t):
+    street=" ".join(x for x in [t.get("addr:street",""),t.get("addr:housenumber","")] if x).strip(); city=t.get("addr:city") or t.get("addr:place") or ""; pc=t.get("addr:postcode","")
+    return ", ".join(x for x in [street," ".join(x for x in [pc,city] if x).strip()] if x)
+@app.get("/api/store-search")
+def store_search():
+    q=(request.args.get("q") or "").strip()
+    if len(q)<2:return jsonify({"results":[]})
+    key=q.lower(); now=time.time()
+    if key in STORE_SEARCH_CACHE and now-STORE_SEARCH_CACHE[key][0]<3600:return jsonify({"results":STORE_SEARCH_CACHE[key][1]})
+    try:
+        g=requests.get("https://nominatim.openstreetmap.org/search",params={"q":q,"format":"jsonv2","limit":1,"countrycodes":"de"},headers=HEADERS,timeout=8);g.raise_for_status();rows=g.json()
+        if not rows:return jsonify({"results":[]})
+        lat=float(rows[0]["lat"]);lon=float(rows[0]["lon"]); oq=f'[out:json][timeout:15];(nwr(around:15000,{lat},{lon})["shop"~"^(supermarket|convenience|chemist)$"];);out center tags;'
+        ov=requests.post("https://overpass-api.de/api/interpreter",data={"data":oq},headers=HEADERS,timeout=20);ov.raise_for_status();els=ov.json().get("elements",[])
+        qwords=[w for w in re.sub(r"[^a-z0-9äöüß ]"," ",q.lower()).split() if len(w)>2 and w not in {"bayreuth","weidenberg","bindlach","markt","filiale"}]
+        result=[];seen=set()
+        for e in els:
+            t=e.get("tags",{}); name=t.get("name") or t.get("brand") or t.get("operator")
+            if not name:continue
+            if qwords and not any(w in name.lower() for w in qwords):continue
+            address=fmt_addr(t)
+            if not address:continue
+            item={"id":f'osm-{e.get("type")}-{e.get("id")}',"name":name,"address":address,"group":t.get("brand") or name,"type":infer_store_type(name,t),"retailer":store_retailer(name),"source":"OpenStreetMap"}
+            k=(name.lower(),address.lower())
+            if k not in seen:seen.add(k);result.append(item)
+        result=sorted(result,key=lambda x:(x["name"].lower(),x["address"].lower()))[:40];STORE_SEARCH_CACHE[key]=(now,result);return jsonify({"results":result})
+    except Exception as exc:
+        app.logger.warning("store search failed: %s",exc);return jsonify({"results":[]})
 
 @app.post("/api/match-offers")
 def match_offers():
