@@ -1,0 +1,36 @@
+RETHINK.einkauf v32 – Funktionsaudit
+
+BESTÄTIGT
+=========
+✓ Mehrfach-Eingabe: Komma/Semikolon/Zeilenumbruch/„und“, Mengen und Einheiten
+✓ Bereits vorhandener Artikel: wird nicht dupliziert, sondern enthakt (= wieder benötigt)
+✓ Homescreen: Produkte alphabetisch
+✓ Haken-Semantik: Haken = nicht benötigt; ohne Haken = einkaufen
+✓ Einkaufsmodus: nur offene Artikel; Abhaken blendet Artikel sofort aus
+✓ Dauerhaft/einmalig und Status nach Einkaufsende
+✓ Zwei Filialen und Resteeinkauf in Filiale 2
+✓ Beide Filial-Laufwege separat bearbeitbar
+✓ Kategorien automatisch + manuell änderbar
+✓ Kategorieauswahl alphabetisch
+✓ Kategorien pro Filiale ausblendbar und wiederherstellbar
+✓ Automatisches Laufweg-Lernen aus Abhak-Reihenfolge
+✓ Manueller Laufweg hat Vorrang; „Wieder automatisch lernen“ vorhanden
+✓ Preisvergleich optional; gespeicherte Preise bleiben erhalten
+✓ Backup Import/Export einschließlich Filial-/Lerndaten
+✓ Meine Filialen + Online-Filialsuche
+✓ Supermarkt/Drogerie mit unterschiedlichen Standard-Laufwegen
+✓ Automatische Angebote und einklappbare Angebotsanzeige
+✓ PWA-Update-System
+
+IN V32 REPARIERT
+================
+✓ Touch-Drag-&-Drop war in v31 nicht vorhanden → jetzt Pointer-Drag auf iPhone/Android
+✓ Zweitfilial-Angebote wurden geladen, aber am Produkt nicht angezeigt → jetzt beide gruppiert
+✓ Angebotsendpoint konnte durch serielle externe Requests Render/Gunicorn blockieren → parallelisiert
+✓ Externe Filialsuche-Timeouts reduziert
+
+HINWEISE
+========
+- Online-Filialsuche basiert auf OpenStreetMap/Nominatim/Overpass. Datenqualität hängt von OSM ab.
+- Angebotsquelle bleibt technisch abhängig von Marktguru-Seitenstruktur.
+- Automatisch gelernter Laufweg wird mit mehreren Einkäufen besser; nach einem einzigen Einkauf ist er bewusst nur vorläufig.

@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests, re, time
 from urllib.parse import quote
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ROOT=Path(__file__).resolve().parent
 app=Flask(__name__, static_folder=str(ROOT), static_url_path="")
@@ -23,7 +24,7 @@ def fetch(url):
     now=time.time()
     if url in CACHE and now-CACHE[url][0]<TTL:
         return CACHE[url][1]
-    r=requests.get(url,headers=HEADERS,timeout=8)
+    r=requests.get(url,headers=HEADERS,timeout=5)
     r.raise_for_status()
     CACHE[url]=(now,r.text)
     return r.text
@@ -197,10 +198,10 @@ def store_search():
     key=q.lower(); now=time.time()
     if key in STORE_SEARCH_CACHE and now-STORE_SEARCH_CACHE[key][0]<3600:return jsonify({"results":STORE_SEARCH_CACHE[key][1]})
     try:
-        g=requests.get("https://nominatim.openstreetmap.org/search",params={"q":q,"format":"jsonv2","limit":1,"countrycodes":"de"},headers=HEADERS,timeout=8);g.raise_for_status();rows=g.json()
+        g=requests.get("https://nominatim.openstreetmap.org/search",params={"q":q,"format":"jsonv2","limit":1,"countrycodes":"de"},headers=HEADERS,timeout=5);g.raise_for_status();rows=g.json()
         if not rows:return jsonify({"results":[]})
         lat=float(rows[0]["lat"]);lon=float(rows[0]["lon"]); oq=f'[out:json][timeout:15];(nwr(around:15000,{lat},{lon})["shop"~"^(supermarket|convenience|chemist)$"];);out center tags;'
-        ov=requests.post("https://overpass-api.de/api/interpreter",data={"data":oq},headers=HEADERS,timeout=20);ov.raise_for_status();els=ov.json().get("elements",[])
+        ov=requests.post("https://overpass-api.de/api/interpreter",data={"data":oq},headers=HEADERS,timeout=10);ov.raise_for_status();els=ov.json().get("elements",[])
         qwords=[w for w in re.sub(r"[^a-z0-9äöüß ]"," ",q.lower()).split() if len(w)>2 and w not in {"bayreuth","weidenberg","bindlach","markt","filiale"}]
         result=[];seen=set()
         for e in els:
@@ -220,11 +221,11 @@ def store_search():
 def match_offers():
     data=request.get_json(force=True) or {}
     retailer=data.get("retailer","")
-    matches={}
-    for item in data.get("items",[])[:40]:
-        iid=str(item.get("id",""));name=(item.get("name") or "").strip()
-        if not iid or not name:
-            continue
+    items=[x for x in data.get("items",[])[:25] if x.get("id") and (x.get("name") or "").strip()]
+
+    def one_item(item):
+        iid=str(item.get("id",""))
+        name=(item.get("name") or "").strip()
         slug=slugify(name)
         collected=[]
         urls=[
@@ -240,7 +241,20 @@ def match_offers():
         category_url=f"https://www.marktguru.de/rc/{quote(retailer)}/{quote(slug)}"
         for offer in relevant:
             offer["source_url"]=category_url
-        matches[iid]=relevant
+        return iid,relevant
+
+    matches={}
+    # External pages are I/O-bound. Parallel item fetches keep the request well
+    # below Gunicorn's default timeout instead of doing up to 50 HTTP calls serially.
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        futures=[pool.submit(one_item,item) for item in items]
+        for f in as_completed(futures):
+            try:
+                iid,relevant=f.result()
+                matches[iid]=relevant
+            except Exception:
+                pass
+
     return jsonify({"matches":matches,"source":"marktguru.de","cached_seconds":TTL})
 
 if __name__=="__main__":
