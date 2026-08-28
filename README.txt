@@ -61,3 +61,17 @@ v35 – Keyword-Audit
 - Große Erweiterung typischer Alltagsprodukte und Synonyme.
 - Gewürze, Essig & Öl und Backen bleiben getrennt.
 - Eier bleiben global bei Kühlung/Milchprodukte; v34-Lernen darf sie je Filiale automatisch umplatzieren.
+
+v36 – UX, Eingabe, Bearbeitung und Deployment-Härtung
+- Bananen x6 / Bananen ×6 / Bananen 6x werden als Menge erkannt.
+- Mehrfach-Eingabe mit Komma, Semikolon, Zeilenumbruch, und/sowie/plus/+.
+- Offene Produkte stehen auf dem Startbildschirm immer zuerst.
+- Klick auf Produkt öffnet Bearbeitung: Name, Menge, Kategorie, einmalig/dauerhaft, Löschen.
+- Bottom-Navigation nur Liste + Filialen.
+- Einstellungen wieder oben rechts fixiert.
+- Einkauf starten immer oben in der Appbar mit Anzahl offener Artikel.
+- Ohne eigene Filiale wird Einkauf nicht gestartet; App öffnet Filialen.
+- Haupt-/Zweitfiliale direkt unter Filialen auswählbar.
+- Laufweg direkt pro gespeicherter Filiale erreichbar.
+- PWA/Render-Version v36: versionierte Assets, SW updateViaCache=none, no-store App-Shell.
+- /health meldet version v36.

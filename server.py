@@ -164,9 +164,18 @@ def parse_offers(html,retailer_slug):
     return result
 
 
+@app.after_request
+def disable_stale_app_cache(response):
+    path=request.path
+    if path=="/" or path.endswith((".js",".css",".webmanifest")) or path.endswith("sw.js"):
+        response.headers["Cache-Control"]="no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"]="no-cache"
+        response.headers["Expires"]="0"
+    return response
+
 @app.get("/health")
 def health():
-    return jsonify({"status":"ok","app":"RETHINK.einkauf"})
+    return jsonify({"status":"ok","app":"RETHINK.einkauf","version":"v36"})
 
 @app.get("/")
 def home():
