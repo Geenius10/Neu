@@ -56,3 +56,8 @@ v34 – automatische filialspezifische Produktplatzierung
 - Wiederholt sich dieselbe Nachbarschaft, wird nach mindestens 3 stützenden Beobachtungen eine filialspezifische Kategorie gelernt.
 - Priorität: manuelle Filialplatzierung > automatisch gelernte Filialplatzierung > globaler Standard.
 - Manuelle Filialplatzierungen können entfernt werden, danach lernt die App wieder automatisch.
+
+v35 – Keyword-Audit
+- Große Erweiterung typischer Alltagsprodukte und Synonyme.
+- Gewürze, Essig & Öl und Backen bleiben getrennt.
+- Eier bleiben global bei Kühlung/Milchprodukte; v34-Lernen darf sie je Filiale automatisch umplatzieren.
