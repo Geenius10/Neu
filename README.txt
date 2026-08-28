@@ -75,3 +75,18 @@ v36 – UX, Eingabe, Bearbeitung und Deployment-Härtung
 - Laufweg direkt pro gespeicherter Filiale erreichbar.
 - PWA/Render-Version v36: versionierte Assets, SW updateViaCache=none, no-store App-Shell.
 - /health meldet version v36.
+
+
+v37 – Mehrfach-Eingabe + Offline-Filialkatalog + UX
+----------------------------------------------------
+- Mehrfach-Eingabe hat jetzt zwei Erkennungsstufen.
+- Unterstützt auch ohne Trennzeichen: "Bananen x6 Milch Brot Butter".
+- Weiterhin unterstützt: Kommas, Semikolon, Zeilenumbrüche, und/sowie/plus/+ sowie Mengen vorne/hinten.
+- Einkauf-starten-Button direkt unter "Hinzufügen" UND unterhalb der gesamten Liste.
+- Kein Einkauf-starten-Button mehr in der oberen Appbar.
+- Einstellungen sauber ganz rechts in der oberen Leiste.
+- Offline-Filialkatalog für Bayreuth & Umgebung; Online-Suche ist nur noch Ergänzung.
+- Katalog enthält Supermarkt, Discounter, Bio, Drogerie mit Lebensmitteln und Getränkemarkt.
+- Ohne eigene Filiale bleibt Start gesperrt und führt zu Filialen.
+- Neues schlichteres App-Icon.
+- /health meldet v37.

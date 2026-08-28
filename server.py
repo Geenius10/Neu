@@ -175,7 +175,7 @@ def disable_stale_app_cache(response):
 
 @app.get("/health")
 def health():
-    return jsonify({"status":"ok","app":"RETHINK.einkauf","version":"v36"})
+    return jsonify({"status":"ok","app":"RETHINK.einkauf","version":"v37"})
 
 @app.get("/")
 def home():

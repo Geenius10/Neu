@@ -1,4 +1,4 @@
-const CACHE="rethink-einkauf-v36";const ASSETS=["./","./styles.css?v=36","./app.js?v=36","./manifest.webmanifest?v=36","./icon-192.png?v=36","./icon-512.png?v=36"];
+const CACHE="rethink-einkauf-v37";const ASSETS=["./","./styles.css?v=36","./app.js?v=36","./manifest.webmanifest?v=36","./icon-192.png?v=36","./icon-512.png?v=36"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))));
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));
 self.addEventListener("message",e=>{if(e.data?.type==="SKIP_WAITING")self.skipWaiting()});

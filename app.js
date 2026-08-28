@@ -1,6 +1,7 @@
 const LEGACY_STORES=[{"id": "edeka-center-otto", "group": "EDEKA", "name": "E center Schneidermarkt", "address": "Otto-Hahn-Straße 1, 95447 Bayreuth", "retailer": "edeka-center"}, {"id": "edeka-gravenreuth", "group": "EDEKA", "name": "EDEKA Schneidermarkt", "address": "Gravenreuther Straße 19, 95445 Bayreuth", "retailer": "edeka"}, {"id": "edeka-meran", "group": "EDEKA", "name": "EDEKA Schneidermarkt", "address": "Meranierring 2, 95445 Bayreuth", "retailer": "edeka"}, {"id": "edeka-pensel", "group": "EDEKA", "name": "EDEKA Pensel", "address": "Königsallee 45, 95448 Bayreuth", "retailer": "edeka"}, {"id": "edeka-center-riedinger", "group": "EDEKA", "name": "E center Schneidermarkt", "address": "Riedingerstraße 21, 95448 Bayreuth", "retailer": "edeka-center"}, {"id": "nahgut-troeger", "group": "EDEKA", "name": "nah & gut Tröger", "address": "Eichendorffring 1, 95447 Bayreuth", "retailer": "edeka-nah-gut"}, {"id": "rewe-justus", "group": "REWE", "name": "REWE", "address": "Justus-Liebig-Str. 8, 95447 Bayreuth", "retailer": "rewe"}, {"id": "rewe-kanal", "group": "REWE", "name": "REWE", "address": "Kanalstr. 15–17, 95444 Bayreuth", "retailer": "rewe"}, {"id": "rewe-friedrich", "group": "REWE", "name": "REWE", "address": "Friedrichstr. 53, 95444 Bayreuth", "retailer": "rewe"}, {"id": "rewe-spinnerei", "group": "REWE", "name": "REWE", "address": "Spinnereistr. 7–13, 95445 Bayreuth", "retailer": "rewe"}, {"id": "rewe-bamberger", "group": "REWE", "name": "REWE", "address": "Bamberger Str. 32, 95445 Bayreuth", "retailer": "rewe"}, {"id": "nahkauf-friedrich-ebert", "group": "REWE", "name": "nahkauf", "address": "Friedrich-Ebert-Str. 14, 95448 Bayreuth", "retailer": "nahkauf"}, {"id": "nahkauf-carl-burger", "group": "REWE", "name": "nahkauf", "address": "Carl-Burger-Str. 8, 95445 Bayreuth", "retailer": "nahkauf"}, {"id": "nahkauf-preuschwitz", "group": "REWE", "name": "nahkauf", "address": "Preuschwitzer Str. 23, 95445 Bayreuth", "retailer": "nahkauf"}, {"id": "rewe-express-hindenburg", "group": "REWE", "name": "REWE express", "address": "Hindenburgstraße 4, 95445 Bayreuth", "retailer": "rewe"}, {"id": "lidl-adolf", "group": "Lidl", "name": "Lidl", "address": "Adolf-Wächter-Str. 1, 95447 Bayreuth", "retailer": "lidl"}, {"id": "lidl-meran", "group": "Lidl", "name": "Lidl", "address": "Meranierring 49, 95445 Bayreuth", "retailer": "lidl"}, {"id": "lidl-nuernberg", "group": "Lidl", "name": "Lidl", "address": "Nürnberger Str. 3a, 95448 Bayreuth", "retailer": "lidl"}, {"id": "lidl-riedinger", "group": "Lidl", "name": "Lidl", "address": "Riedingerstraße 21, 95448 Bayreuth", "retailer": "lidl"}, {"id": "aldi-tunnel", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Tunnelstraße 11, 95448 Bayreuth", "retailer": "aldi-sued"}, {"id": "aldi-otto", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Otto-Hahn-Straße 1a, 95447 Bayreuth", "retailer": "aldi-sued"}, {"id": "aldi-himmelkron", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Himmelkronstraße 1, 95445 Bayreuth", "retailer": "aldi-sued"}, {"id": "aldi-theodor", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Theodor-Schmidt-Straße 12, 95448 Bayreuth", "retailer": "aldi-sued"}, {"id": "aldi-nuernberg", "group": "ALDI SÜD", "name": "ALDI SÜD", "address": "Nürnberger Str. 96, 95448 Bayreuth", "retailer": "aldi-sued"}, {"id": "netto-leuschner", "group": "Netto", "name": "Netto Marken-Discount", "address": "Leuschnerstraße 84, 95447 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-koenigsallee", "group": "Netto", "name": "Netto Marken-Discount", "address": "Königsallee 47, 95448 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-bamberger", "group": "Netto", "name": "Netto Marken-Discount", "address": "Bamberger Str. 38, 95445 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-spinnerei", "group": "Netto", "name": "Netto Marken-Discount", "address": "Spinnereistraße 7, 95445 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-richard", "group": "Netto", "name": "Netto Marken-Discount", "address": "Richard-Wagner-Straße 17, 95444 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "netto-nuernberg", "group": "Netto", "name": "Netto Marken-Discount", "address": "Nürnberger Str. 37, 95447 Bayreuth", "retailer": "netto-marken-discount"}, {"id": "norma-kanal", "group": "NORMA", "name": "NORMA", "address": "Kanalstraße 17, 95444 Bayreuth", "retailer": "norma"}, {"id": "norma-spitzweg", "group": "NORMA", "name": "NORMA", "address": "Spitzwegstraße 59, 95447 Bayreuth", "retailer": "norma"}, {"id": "norma-bauhof", "group": "NORMA", "name": "NORMA", "address": "Am Bauhof 4, 95445 Bayreuth", "retailer": "norma"}, {"id": "norma-kemnather", "group": "NORMA", "name": "NORMA", "address": "Kemnather Str. 29, 95448 Bayreuth", "retailer": "norma"}, {"id": "kaufland-weiher", "group": "Kaufland", "name": "Kaufland Bayreuth", "address": "Weiherstraße 27, 95448 Bayreuth", "retailer": "kaufland"}, {"id": "sultan-weiher", "group": "Weitere", "name": "sultan Markt Bayreuth", "address": "Weiherstraße 1, 95448 Bayreuth", "retailer": null}, {"id": "fruchtgarten", "group": "Weitere", "name": "Fruchtgarten Bayreuth GmbH", "address": "Ritter-von-Eitzenberger-Straße 9, 95448 Bayreuth", "retailer": null}];
 const SUPERMARKET_ROUTE=["Aktionsware / Non-Food", "Baby & Familie", "Backen", "Backwaren", "Drogerie & Körperpflege", "Essig & Öl", "Frischetheke Fleisch & Wurst", "Frischetheke Käse & Feinkost", "Getränke alkoholfrei", "Getränke alkoholisch", "Gewürze", "Haushalt & Reinigung", "Kasse / Impulsware", "Kühlung Convenience", "Kühlung Milchprodukte", "Obst & Gemüse", "Sonstiges", "Süßwaren & Snacks", "Tabak & Raucherbedarf", "Tiefkühlung", "Tiernahrung", "Vorrat Frühstück & Brotaufstrich", "Vorrat Konserven & Saucen", "Vorrat Nudeln, Reis & Hülsenfrüchte", "Zeitschriften & Presse"];
 const DRUGSTORE_ROUTE=["Baby & Familie","Drogerie & Körperpflege","Gesundheit & Nahrungsergänzung","Haushalt & Reinigung","Hygiene & Damenhygiene","Kosmetik & Gesichtspflege","Parfum & Düfte","Tiernahrung","Foto & Services","Aktionsware / Non-Food","Kasse / Impulsware","Sonstiges"];
+const BEVERAGE_ROUTE=["Getränke alkoholfrei","Getränke alkoholisch","Süßwaren & Snacks","Kasse / Impulsware","Sonstiges"];
 const CATEGORY_KEYWORDS={
 "Obst & Gemüse":["banan","apfel","aepfel","birne","orange","mandarine","zitrone","limette","traube","weintraube","erdbeer","himbeer","heidelbeer","beere","kiwi","mango","ananas","melone","pfirsich","nektarine","pflaume","zwetschge","tomate","gurke","paprika","zucchini","aubergine","karotte","moehre","möhre","kartoffel","zwiebel","knoblauch","salat","spinat","brokkoli","blumenkohl","kohl","champignon","pilz","avocado","kraeuter","kräuter","obst","gemuese","gemüse","äpfel","birnen","banane","bananen","orangen","mandarinen","zitronen","limetten","trauben","erdbeere","erdbeeren","himbeere","himbeeren","wassermelone","tomaten","gurken","kopfsalat","feldsalat","rucola","karotten","möhren","kartoffeln","zwiebeln","lauch","porree","sellerie","champignons","radieschen","spargel","kürbis","ingwer","petersilie","schnittlauch","basilikum"],
 "Backwaren":["brot","broetchen","brötchen","toast","baguette","ciabatta","croissant","brezel","semmel","backware","kuchen","muffin","donut","teilchen","semmeln","toastbrot","croissants","brezen","laugenstange","vollkornbrot","mischbrot","roggenbrot","knäckebrot","zwieback","wraps"],
@@ -29,14 +30,14 @@ const CATEGORY_KEYWORDS={
 "Kasse / Impulsware":["kaugummi","lotto","rubellos","impulsware","mint","bonbon kasse","kaugummis","bonbon","bonbons","minzpastillen"]
 };
 CATEGORY_KEYWORDS["Gesundheit & Nahrungsergänzung"]=["vitamin","magnesium","zink","nahrungsergänzung","pflaster","verband"];CATEGORY_KEYWORDS["Hygiene & Damenhygiene"]=["tampon","binde","slipeinlage","intimpflege","desinfektion"];CATEGORY_KEYWORDS["Kosmetik & Gesichtspflege"]=["make up","mascara","lippenstift","foundation","gesichtscreme","serum"];CATEGORY_KEYWORDS["Parfum & Düfte"]=["parfum","eau de toilette","duft"];CATEGORY_KEYWORDS["Foto & Services"]=["foto","fotopapier","passbild"];
-const ALL_CATEGORIES=[...new Set([...SUPERMARKET_ROUTE,...DRUGSTORE_ROUTE])].sort((a,b)=>a.localeCompare(b,"de",{sensitivity:"base"}));const STORAGE_KEY="rethink-einkauf-v36";const $=s=>document.querySelector(s);
+const ALL_CATEGORIES=[...new Set([...SUPERMARKET_ROUTE,...DRUGSTORE_ROUTE])].sort((a,b)=>a.localeCompare(b,"de",{sensitivity:"base"}));const STORAGE_KEY="rethink-einkauf-v37";const $=s=>document.querySelector(s);
 function norm(s){return String(s||"").toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss").replace(/[^a-z0-9]+/g," ").trim()}
 function infer(name){const text=norm(name);let best="Sonstiges",score=0;for(const[cat,words]of Object.entries(CATEGORY_KEYWORDS)){let local=0;for(const raw of words){const k=norm(raw);if(!k)continue;if(text===k)local+=100;else if(text.includes(k))local+=20+k.length;else if(text.split(" ").some(w=>w.startsWith(k)||k.startsWith(w)))local+=8}if(local>score){score=local;best=cat}}return best}
 function retailerFromName(name){const n=norm(name);if(n.includes("rewe"))return"rewe";if(n.includes("nahkauf"))return"nahkauf";if(n.includes("lidl"))return"lidl";if(n.includes("aldi"))return"aldi-sued";if(n.includes("netto"))return"netto-marken-discount";if(n.includes("norma"))return"norma";if(n.includes("kaufland"))return"kaufland";if(n.includes("edeka")||n.includes("e center"))return"edeka";return null}
 function storeTemplate(s){return{id:String(s.id),name:s.name||"Filiale",address:s.address||"",group:s.group||s.chain||"",type:s.type||"supermarket",retailer:s.retailer??retailerFromName(s.name),source:s.source||"saved"}}
 function emptyState(){return{items:[],myStores:[],store:"",compareStore:"",routes:{},hiddenCategories:{},learning:{},storeCategoryOverrides:{},autoCategoryLearning:{},offers:{},compareOffers:{},prices:{},settings:{priceComparison:false},shopStage:1,shopSequence:{},routeEditStore:""}}
 function migrate(raw){const s={...emptyState(),...(raw||{})};s.items=Array.isArray(s.items)?s.items:[];s.myStores=Array.isArray(s.myStores)?s.myStores.map(storeTemplate):[];s.routes=s.routes||{};s.hiddenCategories=s.hiddenCategories||{};s.learning=s.learning||{};s.storeCategoryOverrides=s.storeCategoryOverrides||{};s.autoCategoryLearning=s.autoCategoryLearning||{};s.offers=s.offers||{};s.compareOffers=s.compareOffers||{};s.prices=s.prices||{};s.settings={priceComparison:false,...(s.settings||{})};s.shopSequence={};for(const sid of[s.store,s.compareStore]){if(sid&&!s.myStores.some(x=>x.id===sid)){const old=LEGACY_STORES.find(x=>x.id===sid);if(old)s.myStores.push(storeTemplate({...old,type:"supermarket",source:"migration"}))}}if(!s.myStores.some(x=>x.id===s.store))s.store=s.myStores[0]?.id||"";if(s.compareStore&&!s.myStores.some(x=>x.id===s.compareStore))s.compareStore="";s.items.forEach(i=>{i.mode=i.mode==="recurring"?"recurring":"once";i.checked=!!i.checked;i.cat=i.cat||infer(i.name)});return s}
-function load(){for(const k of[STORAGE_KEY,"rethink-einkauf-v35","rethink-einkauf-v34","rethink-einkauf-v33","rethink-einkauf-v32","rethink-einkauf-v31","rethink-einkauf-v30","rethink-einkauf-v29","rethink-einkauf-v28"])try{const raw=localStorage.getItem(k);if(raw){const s=migrate(JSON.parse(raw));localStorage.setItem(STORAGE_KEY,JSON.stringify(s));return s}}catch(e){}return emptyState()}
+function load(){for(const k of[STORAGE_KEY,"rethink-einkauf-v36","rethink-einkauf-v35","rethink-einkauf-v34","rethink-einkauf-v33","rethink-einkauf-v32","rethink-einkauf-v31","rethink-einkauf-v30","rethink-einkauf-v29","rethink-einkauf-v28"])try{const raw=localStorage.getItem(k);if(raw){const s=migrate(JSON.parse(raw));localStorage.setItem(STORAGE_KEY,JSON.stringify(s));return s}}catch(e){}return emptyState()}
 let state=load(),editing=[],offerTimer=null,pendingServiceWorker=null;function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}function getStore(id){return state.myStores.find(s=>s.id===id)||null}function currentStore(){return getStore(state.store)}function compareStore(){return getStore(state.compareStore)}function itemStoreKey(item){return norm(item.name)}
 function categoryForStore(item,storeId){return state.storeCategoryOverrides?.[storeId]?.[itemStoreKey(item)]||state.autoCategoryLearning?.[storeId]?.[itemStoreKey(item)]?.category||item.cat}
 function setCategoryForStore(item,storeId,category){state.storeCategoryOverrides[storeId]=state.storeCategoryOverrides[storeId]||{};state.storeCategoryOverrides[storeId][itemStoreKey(item)]=category}function isManualCategoryOverride(item,storeId){return !!state.storeCategoryOverrides?.[storeId]?.[itemStoreKey(item)]}
@@ -74,7 +75,96 @@ function learnItemPlacements(storeId){
 }
 
 
-function defaultRoute(id){return getStore(id)?.type==="drugstore"?DRUGSTORE_ROUTE:SUPERMARKET_ROUTE}function learnedRoute(id){const base=defaultRoute(id),stats=state.learning?.[id]?.positions||{},seen=[],unseen=[];for(const c of base){const x=stats[c];if(x?.count)seen.push([c,x.sum/x.count]);else unseen.push(c)}seen.sort((a,b)=>a[1]-b[1]);return[...seen.map(x=>x[0]),...unseen]}function route(id=state.store){const base=state.routes[id]||learnedRoute(id),hidden=new Set(state.hiddenCategories?.[id]||[]);return base.filter(c=>!hidden.has(c))}function learnStatus(id){if(state.routes[id])return"Manuell";const n=state.learning?.[id]?.trips||0;return n?`Lernt · ${n} Einkauf${n===1?"":"e"}`:"Noch ungelernt"}
+
+const BUILTIN_STORES=[
+{id:"cat-rewe-justus",name:"REWE",chain:"REWE",address:"Justus-Liebig-Str. 8, 95447 Bayreuth",type:"supermarket",retailer:"rewe"},
+{id:"cat-rewe-kanal",name:"REWE",chain:"REWE",address:"Kanalstr. 15-17, 95444 Bayreuth",type:"supermarket",retailer:"rewe"},
+{id:"cat-rewe-friedrich",name:"REWE",chain:"REWE",address:"Friedrichstr. 53, 95444 Bayreuth",type:"supermarket",retailer:"rewe"},
+{id:"cat-rewe-spinnerei",name:"REWE",chain:"REWE",address:"Spinnereistr. 7-13, 95445 Bayreuth",type:"supermarket",retailer:"rewe"},
+{id:"cat-rewe-bamberger",name:"REWE",chain:"REWE",address:"Bamberger Str. 32, 95445 Bayreuth",type:"supermarket",retailer:"rewe"},
+{id:"cat-nahkauf-friedrich-ebert",name:"nahkauf",chain:"nahkauf",address:"Friedrich-Ebert-Str. 14, 95448 Bayreuth",type:"supermarket",retailer:"nahkauf"},
+{id:"cat-nahkauf-carl",name:"nahkauf",chain:"nahkauf",address:"Carl-Burger-Str. 8, 95445 Bayreuth",type:"supermarket",retailer:"nahkauf"},
+{id:"cat-nahkauf-preuschwitz",name:"nahkauf",chain:"nahkauf",address:"Preuschwitzer Str. 23, 95445 Bayreuth",type:"supermarket",retailer:"nahkauf"},
+
+{id:"cat-lidl-adolf",name:"Lidl",chain:"Lidl",address:"Adolf-Wächter-Str. 1, 95447 Bayreuth",type:"supermarket",retailer:"lidl"},
+{id:"cat-lidl-meran",name:"Lidl",chain:"Lidl",address:"Meranierring 49, 95445 Bayreuth",type:"supermarket",retailer:"lidl"},
+{id:"cat-lidl-nuernberg",name:"Lidl",chain:"Lidl",address:"Nürnberger Str. 3a, 95448 Bayreuth",type:"supermarket",retailer:"lidl"},
+{id:"cat-lidl-riedinger",name:"Lidl",chain:"Lidl",address:"Riedingerstr. 21, 95448 Bayreuth",type:"supermarket",retailer:"lidl"},
+
+{id:"cat-edeka-otto",name:"E center Schneidermarkt",chain:"EDEKA",address:"Otto-Hahn-Str. 1, 95447 Bayreuth",type:"supermarket",retailer:"edeka-center"},
+{id:"cat-edeka-gravenreuth",name:"EDEKA Schneidermarkt",chain:"EDEKA",address:"Gravenreuther Str. 19, 95445 Bayreuth",type:"supermarket",retailer:"edeka"},
+{id:"cat-edeka-meran",name:"EDEKA Schneidermarkt",chain:"EDEKA",address:"Meranierring 2, 95445 Bayreuth",type:"supermarket",retailer:"edeka"},
+{id:"cat-edeka-pensel",name:"EDEKA Pensel",chain:"EDEKA",address:"Königsallee 45, 95448 Bayreuth",type:"supermarket",retailer:"edeka"},
+{id:"cat-edeka-riedinger",name:"E center Schneidermarkt",chain:"EDEKA",address:"Riedinger Str. 21, 95448 Bayreuth",type:"supermarket",retailer:"edeka-center"},
+{id:"cat-edeka-bindlach",name:"EDEKA Schneider",chain:"EDEKA",address:"Leuschnitzstr. 4b, 95463 Bindlach",type:"supermarket",retailer:"edeka"},
+{id:"cat-edeka-weidenberg",name:"EDEKA Peukert",chain:"EDEKA",address:"Winter-Ring 2, 95466 Weidenberg",type:"supermarket",retailer:"edeka"},
+{id:"cat-edeka-eckersdorf",name:"EDEKA",chain:"EDEKA",address:"Talstr. 1a, 95488 Eckersdorf",type:"supermarket",retailer:"edeka"},
+
+{id:"cat-aldi-otto",name:"ALDI SÜD",chain:"ALDI SÜD",address:"Otto-Hahn-Str. 1a, 95447 Bayreuth",type:"supermarket",retailer:"aldi-sued"},
+{id:"cat-aldi-tunnel",name:"ALDI SÜD",chain:"ALDI SÜD",address:"Tunnelstr. 11, 95448 Bayreuth",type:"supermarket",retailer:"aldi-sued"},
+{id:"cat-aldi-nuernberg",name:"ALDI SÜD",chain:"ALDI SÜD",address:"Nürnberger Str. 96, 95448 Bayreuth",type:"supermarket",retailer:"aldi-sued"},
+{id:"cat-aldi-theodor",name:"ALDI SÜD",chain:"ALDI SÜD",address:"Theodor-Schmidt-Str. 12, 95448 Bayreuth",type:"supermarket",retailer:"aldi-sued"},
+{id:"cat-aldi-weidenberg",name:"ALDI SÜD",chain:"ALDI SÜD",address:"Winter-Ring 6, 95466 Weidenberg",type:"supermarket",retailer:"aldi-sued"},
+
+{id:"cat-netto-richard",name:"Netto Marken-Discount",chain:"Netto",address:"Richard-Wagner-Str. 17, 95444 Bayreuth",type:"supermarket",retailer:"netto-marken-discount"},
+{id:"cat-netto-spinnerei",name:"Netto Marken-Discount",chain:"Netto",address:"Spinnereistr. 7, 95445 Bayreuth",type:"supermarket",retailer:"netto-marken-discount"},
+{id:"cat-netto-bamberger",name:"Netto Marken-Discount",chain:"Netto",address:"Bamberger Str. 38, 95445 Bayreuth",type:"supermarket",retailer:"netto-marken-discount"},
+{id:"cat-netto-leuschner",name:"Netto Marken-Discount",chain:"Netto",address:"Leuschnerstr. 84, 95447 Bayreuth",type:"supermarket",retailer:"netto-marken-discount"},
+
+{id:"cat-norma-kanal",name:"NORMA",chain:"NORMA",address:"Kanalstr. 17, 95444 Bayreuth",type:"supermarket",retailer:"norma"},
+{id:"cat-norma-spitzweg",name:"NORMA",chain:"NORMA",address:"Spitzwegstr. 59, 95447 Bayreuth",type:"supermarket",retailer:"norma"},
+{id:"cat-norma-bindlach",name:"NORMA",chain:"NORMA",address:"Lehengraben 2b, 95463 Bindlach",type:"supermarket",retailer:"norma"},
+{id:"cat-norma-weidenberg",name:"NORMA",chain:"NORMA",address:"Bahnhofstr. 18, 95466 Weidenberg",type:"supermarket",retailer:"norma"},
+
+{id:"cat-kaufland",name:"Kaufland Bayreuth",chain:"Kaufland",address:"Weiherstr. 27, 95448 Bayreuth",type:"supermarket",retailer:"kaufland"},
+{id:"cat-denns-schiller",name:"Denns BioMarkt",chain:"Denns",address:"Friedrich-von-Schiller-Str. 35, 95448 Bayreuth",type:"organic",retailer:""},
+{id:"cat-denns-bernecker",name:"Denns BioMarkt",chain:"Denns",address:"Bernecker Str. 39, 95448 Bayreuth",type:"organic",retailer:""},
+
+{id:"cat-dm-otto",name:"dm-drogerie markt",chain:"dm",address:"Otto-Hahn-Str. 1b, 95447 Bayreuth",type:"drugstore",retailer:""},
+{id:"cat-dm-nuernberg",name:"dm-drogerie markt",chain:"dm",address:"Nürnberger Str. 3c, 95448 Bayreuth",type:"drugstore",retailer:""},
+{id:"cat-dm-richard",name:"dm-drogerie markt",chain:"dm",address:"Richard-Wagner-Str. 4-6, 95444 Bayreuth",type:"drugstore",retailer:""},
+{id:"cat-dm-schiller",name:"dm-drogerie markt",chain:"dm",address:"Friedrich-von-Schiller-Str. 35, 95444 Bayreuth",type:"drugstore",retailer:""},
+{id:"cat-dm-bernecker",name:"dm-drogerie markt",chain:"dm",address:"Bernecker Str. 41, 95448 Bayreuth",type:"drugstore",retailer:""},
+{id:"cat-dm-himmelkron",name:"dm-drogerie markt",chain:"dm",address:"Bayreuther Str. 1, 95502 Himmelkron",type:"drugstore",retailer:""},
+{id:"cat-rossmann-max",name:"ROSSMANN",chain:"ROSSMANN",address:"Maximilianstr. 30, 95444 Bayreuth",type:"drugstore",retailer:""},
+
+{id:"cat-fristo-nuernberg",name:"FRISTO Getränkemarkt",chain:"FRISTO",address:"Nürnberger Str. 92, 95448 Bayreuth",type:"beverage",retailer:""},
+{id:"cat-fristo-kemnath",name:"FRISTO Getränkemarkt",chain:"FRISTO",address:"Kemnather Str. 29, 95448 Bayreuth",type:"beverage",retailer:""},
+{id:"cat-hoffmann",name:"Getränke Hoffmann",chain:"Getränke Hoffmann",address:"Kulmbacher Str. 100, 95445 Bayreuth",type:"beverage",retailer:""},
+{id:"cat-heussinger",name:"Heußinger Getränke und mehr",chain:"Heußinger",address:"Lehengraben 20, 95463 Bindlach",type:"beverage",retailer:""},
+
+{id:"cat-fruchtgarten",name:"Fruchtgarten Bayreuth",chain:"Fruchtgarten",address:"Ritter-von-Eitzenberger-Str. 9, 95448 Bayreuth",type:"supermarket",retailer:""},
+{id:"cat-hollerbusch",name:"Hollerbusch Naturwaren",chain:"Hollerbusch",address:"Luitpoldplatz 16, 95444 Bayreuth",type:"organic",retailer:""},
+{id:"cat-sultan",name:"Sultan Markt",chain:"Sultan Markt",address:"Weiherstr. 1, 95448 Bayreuth",type:"supermarket",retailer:""},
+{id:"cat-bayreuther-market",name:"Bayreuther Market",chain:"Bayreuther Market",address:"Weiherstr. 1, 95448 Bayreuth",type:"supermarket",retailer:""},
+{id:"cat-familienmarkt",name:"Familien Markt",chain:"Familien Markt",address:"Bahnhofstr. 2B, 95444 Bayreuth",type:"supermarket",retailer:""},
+{id:"cat-wm",name:"W & M Lebensmittel",chain:"W & M",address:"Sophian-Kolb-Str. 8, 95448 Bayreuth",type:"supermarket",retailer:""}
+];
+function storeTypeLabel(t){return t==="drugstore"?"Drogerie":t==="beverage"?"Getränkemarkt":t==="organic"?"Bio":"Supermarkt"}
+function catalogMatches(q){
+  const n=norm(q);
+  if(!n)return BUILTIN_STORES;
+  return BUILTIN_STORES.filter(s=>norm(`${s.name} ${s.chain} ${s.address} ${storeTypeLabel(s.type)}`).includes(n));
+}
+function addStoreResult(s){
+  const store=storeTemplate(s);
+  if(!state.myStores.some(x=>x.id===store.id))state.myStores.push(store);
+  if(!state.store)state.store=store.id;
+  save();render();
+  $("#storeSearchState").textContent=store.name+" gespeichert";
+}
+function renderStoreSearchResults(results){
+  const unique=[];const seen=new Set();
+  for(const s of results){
+    const key=norm(`${s.name}|${s.address}`);
+    if(seen.has(key))continue;seen.add(key);unique.push(s);
+  }
+  $("#storeSearchResults").innerHTML=unique.map((s,i)=>`<div class="search-store"><div><b>${esc(s.name)}</b><span>${esc(s.address)}</span><small>${storeTypeLabel(s.type)}</small></div><button data-add-result="${i}" class="mini">＋</button></div>`).join("");
+  $("#storeSearchResults").querySelectorAll("[data-add-result]").forEach(b=>b.onclick=()=>addStoreResult(unique[+b.dataset.addResult]));
+  return unique.length;
+}
+
+function defaultRoute(id){const t=getStore(id)?.type;return t==="drugstore"?DRUGSTORE_ROUTE:t==="beverage"?BEVERAGE_ROUTE:SUPERMARKET_ROUTE}function learnedRoute(id){const base=defaultRoute(id),stats=state.learning?.[id]?.positions||{},seen=[],unseen=[];for(const c of base){const x=stats[c];if(x?.count)seen.push([c,x.sum/x.count]);else unseen.push(c)}seen.sort((a,b)=>a[1]-b[1]);return[...seen.map(x=>x[0]),...unseen]}function route(id=state.store){const base=state.routes[id]||learnedRoute(id),hidden=new Set(state.hiddenCategories?.[id]||[]);return base.filter(c=>!hidden.has(c))}function learnStatus(id){if(state.routes[id])return"Manuell";const n=state.learning?.[id]?.trips||0;return n?`Lernt · ${n} Einkauf${n===1?"":"e"}`:"Noch ungelernt"}
 function recordCategory(i){const id=state.shopStage===2&&state.compareStore?state.compareStore:state.store;if(!id)return;const seq=state.shopSequence[id]||(state.shopSequence[id]=[]);const category=categoryForStore(i,id);if(seq[seq.length-1]?.itemId!==i.id)seq.push({itemId:i.id,category})}
 function commitLearning(id){
   const raw=state.shopSequence[id]||[];
@@ -126,7 +216,7 @@ function renderList(){
   $("#stockSection").hidden=!have.length;
   $("#neededCount").textContent=open.length;
   $("#stockCount").textContent=have.length;
-  $("#headerNeededCount").textContent=open.length;
+  $("#topNeededCount").textContent=open.length;$("#bottomNeededCount").textContent=open.length;
 }function shoppingItems(){const sid=state.shopStage===2&&state.compareStore?state.compareStore:state.store,o=route(sid);return state.items.filter(i=>!i.checked).sort((a,b)=>{const ai=o.indexOf(categoryForStore(a,sid)),bi=o.indexOf(categoryForStore(b,sid)),aa=ai<0?999:ai,bb=bi<0?999:bi;return aa!==bb?aa-bb:a.name.localeCompare(b.name,"de",{sensitivity:"base"})})}function renderShop(){const b=$("#shopItems"),items=shoppingItems(),second=state.shopStage===2&&compareStore(),s=second?compareStore():currentStore();b.innerHTML="";items.forEach(i=>b.append(itemNode(i,true)));bindList(b,true);$("#progressText").textContent=items.length?`${items.length} noch offen`:"Alles erledigt";$("#progressBar").style.width=items.length?"0%":"100%";if(s)$("#shopStore").textContent=s.name+" · "+s.address;$("#shopHeading").textContent=second?"Reste in der zweiten Filiale":"Dein Laufweg";$("#shopStageHint").hidden=!second;if(second)$("#shopStageHint").textContent="Nur offene Artikel aus der ersten Filiale werden angezeigt.";$("#finishBtn").textContent=!second&&compareStore()?"Weiter zur zweiten Filiale →":"Einkauf abschließen ✓"}
 function renderPlan(){const a=$("#storeSelect"),b=$("#compareStoreSelect"),opts=state.myStores.map(s=>`<option value="${s.id}">${esc(s.name)} · ${esc(s.address)}</option>`).join("");a.innerHTML=opts||`<option value="">Keine Filiale gespeichert</option>`;b.innerHTML=`<option value="">Keine zweite Filiale</option>`+opts;a.value=state.store||"";b.value=state.compareStore||"";$("#noStoresNotice").hidden=!!state.myStores.length;const s=currentStore(),c=compareStore();$("#mainRouteCard").hidden=!s;if(s){$("#storeName").textContent=s.name+" · "+s.address;$("#routePreview").innerHTML=route(s.id).map(x=>`<span>${esc(x)}</span>`).join("");$("#mainLearnState").textContent=learnStatus(s.id)}$("#compareRouteCard").hidden=!c;if(c){$("#compareStoreName").textContent=c.name+" · "+c.address;$("#compareRoutePreview").innerHTML=route(c.id).map(x=>`<span>${esc(x)}</span>`).join("");$("#compareLearnState").textContent=learnStatus(c.id)}$("#offerSummary").textContent=s?"Angebote werden automatisch im Hintergrund geprüft.":"Füge unter Filialen zuerst einen Markt hinzu.";
   const qa=$("#storeSelectQuick"),qb=$("#compareStoreSelectQuick");
@@ -137,7 +227,7 @@ function renderPlan(){const a=$("#storeSelect"),b=$("#compareStoreSelect"),opts=
     $("#activeStoresCard").hidden=!state.myStores.length;
   }
 }
-function renderMyStores(){const b=$("#myStores");b.innerHTML=state.myStores.length?state.myStores.map(s=>`<div class="saved-store"><div><b>${esc(s.name)}</b><span>${esc(s.address)}</span><small>${s.type==="drugstore"?"Drogerie":"Supermarkt"} · ${learnStatus(s.id)}</small></div><div class="store-actions"><button class="mini" data-edit-store-route="${s.id}">Laufweg</button><button class="remove-store" data-remove-store="${s.id}">×</button></div></div>`).join(""):`<div class="empty compact"><b>Noch keine Filiale gespeichert</b><span>Suche unten nach deinem ersten Markt.</span></div>`;b.querySelectorAll("[data-edit-store-route]").forEach(x=>x.onclick=()=>{state.routeEditStore=x.dataset.editStoreRoute;editing=[...route(state.routeEditStore)];renderRouteEditor();show("route","Laufweg anpassen")});b.querySelectorAll("[data-remove-store]").forEach(x=>x.onclick=()=>{const id=x.dataset.removeStore;if(!confirm("Filiale aus Meine Filialen entfernen?"))return;state.myStores=state.myStores.filter(s=>s.id!==id);if(state.store===id)state.store=state.myStores[0]?.id||"";if(state.compareStore===id)state.compareStore="";save();render()})}function render(){renderList();renderShop();renderPlan();renderMyStores()}function show(screen,title){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$("#"+screen+"Screen")?.classList.add("active");$("#screenTitle").textContent=title;document.querySelectorAll("[data-nav]").forEach(b=>b.classList.toggle("nav-active",b.dataset.nav===screen));window.scrollTo({top:0,behavior:"smooth"})}
+function renderMyStores(){const b=$("#myStores");if(!$("#storeSearchInput")?.value)renderStoreSearchResults(BUILTIN_STORES);b.innerHTML=state.myStores.length?state.myStores.map(s=>`<div class="saved-store"><div><b>${esc(s.name)}</b><span>${esc(s.address)}</span><small>${storeTypeLabel(s.type)} · ${learnStatus(s.id)}</small></div><div class="store-actions"><button class="mini" data-edit-store-route="${s.id}">Laufweg</button><button class="remove-store" data-remove-store="${s.id}">×</button></div></div>`).join(""):`<div class="empty compact"><b>Noch keine Filiale gespeichert</b><span>Suche unten nach deinem ersten Markt.</span></div>`;b.querySelectorAll("[data-edit-store-route]").forEach(x=>x.onclick=()=>{state.routeEditStore=x.dataset.editStoreRoute;editing=[...route(state.routeEditStore)];renderRouteEditor();show("route","Laufweg anpassen")});b.querySelectorAll("[data-remove-store]").forEach(x=>x.onclick=()=>{const id=x.dataset.removeStore;if(!confirm("Filiale aus Meine Filialen entfernen?"))return;state.myStores=state.myStores.filter(s=>s.id!==id);if(state.store===id)state.store=state.myStores[0]?.id||"";if(state.compareStore===id)state.compareStore="";save();render()})}function render(){renderList();renderShop();renderPlan();renderMyStores()}function show(screen,title){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$("#"+screen+"Screen")?.classList.add("active");$("#screenTitle").textContent=title;document.querySelectorAll("[data-nav]").forEach(b=>b.classList.toggle("nav-active",b.dataset.nav===screen));window.scrollTo({top:0,behavior:"smooth"})}
 const NUMBER_WORDS={ein:1,eine:1,einen:1,einer:1,eins:1,zwei:2,drei:3,vier:4,fuenf:5,fünf:5,sechs:6,sieben:7,acht:8,neun:9,zehn:10,zwoelf:12,zwölf:12};
 const UNIT_WORDS=["flasche","flaschen","packung","packungen","paket","pakete","dose","dosen","becher","glas","glaeser","gläser","kiste","kisten","stueck","stück","stuecke","stücke","kg","kilo","gramm","g","liter","l"];
 const FILLER_PREFIXES=[
@@ -175,11 +265,54 @@ function parseQuantity(text){
   }
   return {name:x,qty:Math.max(1,qty||1),unit};
 }
+
+const KNOWN_PRODUCT_PHRASES=(()=>{
+  const set=new Set();
+  Object.values(CATEGORY_KEYWORDS).flat().forEach(x=>set.add(norm(x)));
+  return [...set].sort((a,b)=>b.split(/\s+/).length-a.split(/\s+/).length||b.length-a.length);
+})();
+function knownProductAt(tokens,start){
+  const max=Math.min(4,tokens.length-start);
+  for(let len=max;len>=1;len--){
+    const phrase=tokens.slice(start,start+len).join(" ");
+    if(KNOWN_PRODUCT_PHRASES.includes(norm(phrase)))return {name:phrase,len};
+  }
+  return null;
+}
+function segmentKnownProducts(raw){
+  const cleaned=cleanShoppingPhrase(raw).replace(/[;,\n]+/g," ").trim();
+  if(!cleaned)return[];
+  const tokens=cleaned.match(/\d+\s*[x×]?|[x×]\s*\d+|[\p{L}ÄÖÜäöüß-]+/gu)||[];
+  const out=[];let i=0,unmatched=0;
+  while(i<tokens.length){
+    let qty=1,unit="";
+    let t=norm(tokens[i]).replace(/\s/g,"");
+    let m=t.match(/^(\d+)[x×]$/);
+    if(m){qty=Number(m[1]);i++;}
+    else if(/^\d+$/.test(t)){qty=Number(t);i++;}
+    else if(NUMBER_WORDS[t]){qty=NUMBER_WORDS[t];i++;}
+    if(i<tokens.length && UNIT_WORDS.includes(norm(tokens[i]))){unit=tokens[i];i++;}
+    const hit=knownProductAt(tokens,i);
+    if(!hit){unmatched++;i++;continue;}
+    i+=hit.len;
+    if(i<tokens.length){
+      const sx=norm(tokens[i]).replace(/\s/g,"").match(/^[x×](\d+)$/);
+      if(sx){qty=Number(sx[1]);i++;}
+    }
+    out.push({name:hit.name,qty:Math.max(1,qty||1),unit});
+  }
+  return out.length>=2 && unmatched<=1 ? out : [];
+}
+
 function smartSplitInput(raw){
   let x=String(raw||"").replace(/\r/g,"").trim();
   if(!x)return[];
-  x=x.replace(/\s+(?:und|sowie|plus)\s+/gi,"|||").replace(/\s*\+\s*/g,"|||");
-  return x.split(/[,;\n]|\|\|\|/).map(cleanShoppingPhrase).filter(Boolean).map(parseQuantity).filter(x=>x.name);
+  const explicit=x.replace(/\s+(?:und|sowie|plus)\s+/gi,"|||").replace(/\s*\+\s*/g,"|||");
+  const chunks=explicit.split(/[,;\n]|\|\|\|/).map(cleanShoppingPhrase).filter(Boolean);
+  if(chunks.length>1)return chunks.map(parseQuantity).filter(x=>x.name);
+  const segmented=segmentKnownProducts(x);
+  if(segmented.length>1)return segmented;
+  return chunks.map(parseQuantity).filter(x=>x.name);
 }
 function addItems(){
   const i=$("#itemInput"),raw=i.value.trim();if(!raw)return;
@@ -289,7 +422,27 @@ function renderRouteEditor(){
   });
 }
 function scheduleOffers(){clearTimeout(offerTimer);offerTimer=setTimeout(loadOffers,350)}async function fetchOffers(s){if(!s?.retailer||!state.items.length)return{};const r=await fetch("/api/match-offers",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({retailer:s.retailer,items:state.items.filter(i=>!i.checked).map(i=>({id:i.id,name:i.name}))})});if(!r.ok)throw 0;return(await r.json()).matches||{}}async function loadOffers(){if(!state.items.length)return;try{const[a,b]=await Promise.all([fetchOffers(currentStore()),compareStore()?fetchOffers(compareStore()):Promise.resolve({})]);state.offers=a;state.compareOffers=b;save();$("#syncState").textContent="Online-Daten aktualisiert";render()}catch(e){$("#syncState").textContent="Online-Daten gerade nicht erreichbar"}}
-async function searchStores(){const q=$("#storeSearchInput").value.trim();if(!q)return;$("#storeSearchState").textContent="Suche online …";$("#storeSearchResults").innerHTML="";try{const r=await fetch("/api/store-search?q="+encodeURIComponent(q));if(!r.ok)throw 0;const d=await r.json();$("#storeSearchState").textContent=d.results.length?`${d.results.length} Filialen gefunden`:"Keine passenden Filialen gefunden";$("#storeSearchResults").innerHTML=d.results.map((s,i)=>`<div class="search-store"><div><b>${esc(s.name)}</b><span>${esc(s.address)}</span><small>${s.type==="drugstore"?"Drogerie":"Supermarkt"}</small></div><button data-add-result="${i}" class="mini">＋</button></div>`).join("");$("#storeSearchResults").querySelectorAll("[data-add-result]").forEach(b=>b.onclick=()=>{const s=storeTemplate(d.results[+b.dataset.addResult]);if(!state.myStores.some(x=>x.id===s.id))state.myStores.push(s);if(!state.store)state.store=s.id;save();render();$("#storeSearchState").textContent=s.name+" gespeichert"})}catch(e){$("#storeSearchState").textContent="Online-Suche gerade nicht erreichbar."}}
+async function searchStores(){
+  const q=$("#storeSearchInput").value.trim();
+  const local=catalogMatches(q);
+  let merged=[...local];
+  const localCount=renderStoreSearchResults(merged);
+  $("#storeSearchState").textContent=localCount?`${localCount} Filialen im Offline-Katalog`:"Online-Suche wird ergänzt …";
+  if(!q)return;
+  try{
+    const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),5500);
+    const r=await fetch("/api/store-search?q="+encodeURIComponent(q),{signal:controller.signal,cache:"no-store"});
+    clearTimeout(timer);
+    if(r.ok){
+      const d=await r.json();
+      merged=[...local,...(d.results||[])];
+      const n=renderStoreSearchResults(merged);
+      $("#storeSearchState").textContent=`${n} Filialen gefunden · Offline-Katalog + Online`;
+    }
+  }catch(e){
+    $("#storeSearchState").textContent=localCount?`${localCount} Filialen im Offline-Katalog · Online gerade nicht erreichbar`:"Keine Filiale im festen Katalog gefunden.";
+  }
+}
 function startShopping(){
   if(!state.myStores.length||!currentStore()){
     $("#storeStartNotice").hidden=false;
@@ -301,14 +454,13 @@ function startShopping(){
   state.shopStage=1;state.shopSequence={};save();show("shop","Einkauf");render();
 }
 function wire(){
-$("#headerStartBtn").onclick=startShopping;
-$("#settingsBtn").onclick=()=>show("settings","Einstellungen");
+$("#settingsBtn").onclick=()=>show("settings","Einstellungen");$("#startShoppingTopBtn").onclick=startShopping;$("#startShoppingBottomBtn").onclick=startShopping;
 $("#editorCloseBtn").onclick=closeItemEditor;
 $("#editorSaveBtn").onclick=saveItemEditor;
 $("#editorDeleteBtn").onclick=()=>{if(!editingItemId)return;state.items=state.items.filter(i=>i.id!==editingItemId);save();closeItemEditor();render();scheduleOffers()};
 $("#itemEditor").onclick=e=>{if(e.target.id==="itemEditor")closeItemEditor()};
-$("#addBtn").onclick=addItems;$("#itemInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();addItems()}};document.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>show(b.dataset.nav,b.dataset.nav==="list"?"Einkaufsliste":b.dataset.nav==="stores"?"Meine Filialen":"Einstellungen"));document.querySelectorAll(".back").forEach(b=>b.onclick=()=>show(b.dataset.screen,b.dataset.screen==="list"?"Einkaufsliste":"Einkauf planen"));$("#storeSelect").onchange=()=>{state.store=$("#storeSelect").value;if(state.compareStore===state.store)state.compareStore="";save();render();scheduleOffers()};$("#compareStoreSelect").onchange=()=>{const v=$("#compareStoreSelect").value;state.compareStore=v===state.store?"":v;save();render();scheduleOffers()};$("#startBtn").onclick=startShopping;$("#finishBtn").onclick=()=>{const sid=state.shopStage===2&&state.compareStore?state.compareStore:state.store;commitLearning(sid);if(state.shopStage===1&&compareStore()){state.items=state.items.filter(i=>!(i.mode==="once"&&i.checked));state.shopStage=2;save();render();return}state.items=state.items.filter(i=>!(i.mode==="once"&&i.checked));state.shopStage=1;save();render();show("list","Einkaufsliste")};$("#editRouteBtn").onclick=()=>{state.routeEditStore=state.store;editing=[...route(state.store)];renderRouteEditor();show("route","Laufweg anpassen")};$("#editCompareRouteBtn").onclick=()=>{if(!compareStore())return;state.routeEditStore=state.compareStore;editing=[...route(state.compareStore)];renderRouteEditor();show("route","Laufweg anpassen")};$("#saveRouteBtn").onclick=()=>{state.routes[state.routeEditStore]=[...editing];state.routeEditStore="";save();render();show("stores","Filialen")};$("#useLearningBtn").onclick=()=>{if(!state.routeEditStore)return;delete state.routes[state.routeEditStore];editing=[...learnedRoute(state.routeEditStore)];save();renderRouteEditor()};$("#storeSearchBtn").onclick=searchStores;$("#storeSearchInput").onkeydown=e=>{if(e.key==="Enter")searchStores()};const qMain=$("#storeSelectQuick"),qSecond=$("#compareStoreSelectQuick");
+$("#addBtn").onclick=addItems;$("#itemInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();addItems()}};document.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>show(b.dataset.nav,b.dataset.nav==="list"?"Einkaufsliste":b.dataset.nav==="stores"?"Meine Filialen":"Einstellungen"));document.querySelectorAll(".back").forEach(b=>b.onclick=()=>show(b.dataset.screen,b.dataset.screen==="list"?"Einkaufsliste":"Einkauf planen"));$("#storeSelect").onchange=()=>{state.store=$("#storeSelect").value;if(state.compareStore===state.store)state.compareStore="";save();render();scheduleOffers()};$("#compareStoreSelect").onchange=()=>{const v=$("#compareStoreSelect").value;state.compareStore=v===state.store?"":v;save();render();scheduleOffers()};$("#startBtn").onclick=startShopping;$("#finishBtn").onclick=()=>{const sid=state.shopStage===2&&state.compareStore?state.compareStore:state.store;commitLearning(sid);if(state.shopStage===1&&compareStore()){state.items=state.items.filter(i=>!(i.mode==="once"&&i.checked));state.shopStage=2;save();render();return}state.items=state.items.filter(i=>!(i.mode==="once"&&i.checked));state.shopStage=1;save();render();show("list","Einkaufsliste")};$("#editRouteBtn").onclick=()=>{state.routeEditStore=state.store;editing=[...route(state.store)];renderRouteEditor();show("route","Laufweg anpassen")};$("#editCompareRouteBtn").onclick=()=>{if(!compareStore())return;state.routeEditStore=state.compareStore;editing=[...route(state.compareStore)];renderRouteEditor();show("route","Laufweg anpassen")};$("#saveRouteBtn").onclick=()=>{state.routes[state.routeEditStore]=[...editing];state.routeEditStore="";save();render();show("stores","Filialen")};$("#useLearningBtn").onclick=()=>{if(!state.routeEditStore)return;delete state.routes[state.routeEditStore];editing=[...learnedRoute(state.routeEditStore)];save();renderRouteEditor()};$("#storeSearchBtn").onclick=searchStores;$("#storeSearchInput").oninput=e=>{const r=catalogMatches(e.target.value);const n=renderStoreSearchResults(r);$("#storeSearchState").textContent=`${n} Filialen im Offline-Katalog`};$("#storeSearchInput").onkeydown=e=>{if(e.key==="Enter")searchStores()};const qMain=$("#storeSelectQuick"),qSecond=$("#compareStoreSelectQuick");
 if(qMain)qMain.onchange=()=>{state.store=qMain.value;if(state.compareStore===state.store)state.compareStore="";save();render();scheduleOffers()};
 if(qSecond)qSecond.onchange=()=>{state.compareStore=qSecond.value===state.store?"":qSecond.value;save();render();scheduleOffers()};
-const pc=$("#priceCompareToggle");pc.checked=state.settings.priceComparison;pc.onchange=()=>{state.settings.priceComparison=pc.checked;save();render()};$("#resetCategoriesBtn").onclick=()=>{if(!state.store)return;const cur=[...route(state.store)],missing=defaultRoute(state.store).filter(c=>!cur.includes(c));state.hiddenCategories[state.store]=[];state.routes[state.store]=[...cur,...missing];save();render();alert("Fehlende Kategorien wurden unten angehängt.")};$("#resetLearningBtn").onclick=()=>{if(confirm("Automatisch gelernte Laufwege zurücksetzen?")){state.learning={};save();render()}};$("#exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify({version:36,data:state},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="rethink-einkauf-backup.json";a.click();URL.revokeObjectURL(a.href)};$("#importInput").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const b=JSON.parse(await f.text());if(!b?.data)throw 0;state=migrate(b.data);save();render();alert("Backup erfolgreich wiederhergestellt.")}catch(x){alert("Backup konnte nicht gelesen werden.")}finally{e.target.value=""}}}
-async function updates(){if(!("serviceWorker"in navigator))return;try{const r=await navigator.serviceWorker.register("./sw.js?v=36",{updateViaCache:"none"});await r.update();if(r.waiting){pendingServiceWorker=r.waiting;$("#updateBanner").hidden=false}r.onupdatefound=()=>{const w=r.installing;w.onstatechange=()=>{if(w.state==="installed"&&navigator.serviceWorker.controller){pendingServiceWorker=w;$("#updateBanner").hidden=false}}};$("#updateNowBtn").onclick=()=>pendingServiceWorker?.postMessage({type:"SKIP_WAITING"});navigator.serviceWorker.oncontrollerchange=()=>location.reload()}catch(e){}}wire();show("list","Einkaufsliste");render();updates();scheduleOffers();
+const pc=$("#priceCompareToggle");pc.checked=state.settings.priceComparison;pc.onchange=()=>{state.settings.priceComparison=pc.checked;save();render()};$("#resetCategoriesBtn").onclick=()=>{if(!state.store)return;const cur=[...route(state.store)],missing=defaultRoute(state.store).filter(c=>!cur.includes(c));state.hiddenCategories[state.store]=[];state.routes[state.store]=[...cur,...missing];save();render();alert("Fehlende Kategorien wurden unten angehängt.")};$("#resetLearningBtn").onclick=()=>{if(confirm("Automatisch gelernte Laufwege zurücksetzen?")){state.learning={};save();render()}};$("#exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify({version:37,data:state},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="rethink-einkauf-backup.json";a.click();URL.revokeObjectURL(a.href)};$("#importInput").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const b=JSON.parse(await f.text());if(!b?.data)throw 0;state=migrate(b.data);save();render();alert("Backup erfolgreich wiederhergestellt.")}catch(x){alert("Backup konnte nicht gelesen werden.")}finally{e.target.value=""}}}
+async function updates(){if(!("serviceWorker"in navigator))return;try{const r=await navigator.serviceWorker.register("./sw.js?v=37",{updateViaCache:"none"});await r.update();if(r.waiting){pendingServiceWorker=r.waiting;$("#updateBanner").hidden=false}r.onupdatefound=()=>{const w=r.installing;w.onstatechange=()=>{if(w.state==="installed"&&navigator.serviceWorker.controller){pendingServiceWorker=w;$("#updateBanner").hidden=false}}};$("#updateNowBtn").onclick=()=>pendingServiceWorker?.postMessage({type:"SKIP_WAITING"});navigator.serviceWorker.oncontrollerchange=()=>location.reload()}catch(e){}}wire();show("list","Einkaufsliste");render();updates();scheduleOffers();
